@@ -1,20 +1,18 @@
 package aiss.videominer.controller;
 
+import aiss.videominer.exceptions.CommentNotFoundException;
 import aiss.videominer.exceptions.VideoNotFoundException;
 import aiss.videominer.model.Comment;
 import aiss.videominer.model.Video;
 import aiss.videominer.repository.CommentRepository;
 import aiss.videominer.repository.VideoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
-
 import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/videominer")
 public class CommentController {
 
     @Autowired
@@ -29,10 +27,10 @@ public class CommentController {
     }
 
     @GetMapping("/comments/{id}")
-    public Comment findOne(@PathVariable String id) {
+    public Comment findOne(@PathVariable String id) throws CommentNotFoundException {
         Optional<Comment> comment = commentRepository.findById(id);
         if (!comment.isPresent()) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Comment no encontrado");
+            throw new CommentNotFoundException();
         }
         return comment.get();
     }
