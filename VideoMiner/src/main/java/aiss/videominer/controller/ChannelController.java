@@ -1,5 +1,6 @@
 package aiss.videominer.controller;
 
+import aiss.videominer.exceptions.ChannelNotFoundException;
 import aiss.videominer.model.Channel;
 import aiss.videominer.repository.ChannelRepository;
 import jakarta.validation.Valid;
@@ -7,8 +8,6 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -36,12 +35,12 @@ public class ChannelController {
 
     // 3. GET: Obtener un canal por ID (El test "Get channel")
     @GetMapping("/{id}")
-    public Channel findOne(@PathVariable String id) {
+    public Channel findOne(@PathVariable String id) throws ChannelNotFoundException {
         Optional<Channel> channel = channelRepository.findById(id);
         
         // El PDF especifica que si un recurso no existe, se debe devolver un 404
         if (!channel.isPresent()) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Canal no encontrado");
+            throw new ChannelNotFoundException();
         }
         
         return channel.get();
