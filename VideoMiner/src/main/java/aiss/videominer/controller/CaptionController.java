@@ -1,0 +1,54 @@
+package aiss.videominer.controller
+
+import aiss.videominer.model.Video;
+import aiss.videominer.model.Caption;
+import aiss.videominer.repository.CaptionRepository;
+import aiss.videominer.repository.VideoRepository;
+import aiss.videominer.exception.VideoNotFoundException;
+import aiss.videominer.exception.CaptionNotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Optional;
+
+@RestController
+@RequestMapping("/api")
+public class CaptionController {
+    @Autowired
+    CaptionRepository captionRepository;
+    @Autowired
+    VideoRepository videoRepository;
+
+    @GetMapping("/captions")
+    public List<Caption> getAllCaptions() {
+        return captionRepository.findAll();
+    }
+
+    @GetMapping("/captions/{id}")
+    public Caption findOne(@PathVariable String id) throws CaptionNotFoundException {
+        Optional<Caption> caption = repository.findById(id);
+        // Si la caption no está presente en la base de datos, lanzamos el error 404
+        if (!caption.isPresent()) {
+            throw new CaptionNotFoundException();
+        }
+        // Si llegamos aquí, es que sí existe, así que la devolvemos
+        return caption.get();
+    }
+
+    @GetMapping("/videos/{videoId}/captions")
+    public List<Caption> getCaptionsByVideoId(@PathVariable String id) throws Exception { // Cambiar Exception por VideoNotFoundException
+
+        // 1. Buscamos el vídeo usando el VideoRepository
+        Optional<Video> video = videoRepository.findById(id);
+
+        // 2. Si no existe, devolvemos 404
+        if (!video.isPresent()) {
+            throw new Exception("Video not found"); // Reemplazar por tu excepción
+        }
+
+        // 3. Si existe, devolvemos su lista de captions.
+        // (Esto funciona gracias a la relación @OneToMany que configuraste en la clase Video)
+        return video.get().getCaptions();
+    }
+}
