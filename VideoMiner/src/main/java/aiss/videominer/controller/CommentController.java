@@ -1,53 +1,48 @@
 package aiss.videominer.controller;
 
+import aiss.videominer.exceptions.VideoNotFoundException;
 import aiss.videominer.model.Comment;
 import aiss.videominer.model.Video;
 import aiss.videominer.repository.CommentRepository;
 import aiss.videominer.repository.VideoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Optional;
 
 @RestController
+@RequestMapping("/api")
 public class CommentController {
 
     @Autowired
-    private CommentRepository commentRepository;
+    CommentRepository commentRepository;
 
     @Autowired
-    private VideoRepository videoRepository;
+    VideoRepository videoRepository;
 
     @GetMapping("/comments")
-    public ResponseEntity<List<Comment>> getAllComments() {
-        List<Comment> comments = commentRepository.findAll();
-        return new ResponseEntity<>(comments, HttpStatus.OK);
+    public List<Comment> getAllComments() {
+        return commentRepository.findAll();
     }
 
     @GetMapping("/comments/{id}")
-    public ResponseEntity<Comment> getCommentById(@PathVariable String id) {
+    public Comment findOne(@PathVariable String id) {
         Optional<Comment> comment = commentRepository.findById(id);
-
-        if (comment.isPresent()) {
-            return new ResponseEntity<>(comment.get(), HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        if (!comment.isPresent()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Comment no encontrado");
         }
+        return comment.get();
     }
 
     @GetMapping("/videos/{videoId}/comments")
-    public ResponseEntity<List<Comment>> getCommentsByVideoId(@PathVariable String videoId) {
+    public List<Comment> getCommentsByVideoId(@PathVariable String videoId) throws VideoNotFoundException {
         Optional<Video> video = videoRepository.findById(videoId);
-
-        if (video.isPresent()) {
-            List<Comment> comments = video.get().getComments();
-            return new ResponseEntity<>(comments, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        if (!video.isPresent()) {
+            throw new VideoNotFoundException();
         }
+        return video.get().getComments();
     }
 }
-
