@@ -8,7 +8,6 @@ import org.springframework.web.client.RestTemplate;
 
 @Service
 public class CaptionService {
-
     @Autowired
     private RestTemplate restTemplate;
 
