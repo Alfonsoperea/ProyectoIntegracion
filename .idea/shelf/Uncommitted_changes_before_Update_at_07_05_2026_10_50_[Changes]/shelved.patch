@@ -1,0 +1,159 @@
+Index: .idea/ProyectoIntegracion.iml
+===================================================================
+diff --git a/.idea/ProyectoIntegracion.iml b/.idea/ProyectoIntegracion.iml
+deleted file mode 100644
+--- a/.idea/ProyectoIntegracion.iml	(revision 92f47f023bdc616fee9416845844a334104a4fe7)
++++ /dev/null	(revision 92f47f023bdc616fee9416845844a334104a4fe7)
+@@ -1,13 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-<module type="JAVA_MODULE" version="4">
+-  <component name="NewModuleRootManager" inherit-compiler-output="true">
+-    <exclude-output />
+-    <content url="file://$MODULE_DIR$">
+-      <sourceFolder url="file://$MODULE_DIR$/PeerTubeMiner/src/main/java" isTestSource="false" />
+-      <sourceFolder url="file://$MODULE_DIR$/VideoMiner/src/main/java" isTestSource="false" />
+-    </content>
+-    <orderEntry type="inheritedJdk" />
+-    <orderEntry type="sourceFolder" forTests="false" />
+-    <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.15.3" level="project" />
+-  </component>
+-</module>
+\ No newline at end of file
+Index: .idea/.gitignore
+===================================================================
+diff --git a/.idea/.gitignore b/.idea/.gitignore
+deleted file mode 100644
+--- a/.idea/.gitignore	(revision 92f47f023bdc616fee9416845844a334104a4fe7)
++++ /dev/null	(revision 92f47f023bdc616fee9416845844a334104a4fe7)
+@@ -1,10 +0,0 @@
+-# Default ignored files
+-/shelf/
+-/workspace.xml
+-# Ignored default folder with query files
+-/queries/
+-# Datasource local storage ignored files
+-/dataSources/
+-/dataSources.local.xml
+-# Editor-based HTTP Client requests
+-/httpRequests/
+Index: .idea/compiler.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"CompilerConfiguration\">\r\n    <annotationProcessing>\r\n      <profile name=\"Maven default annotation processors profile\" enabled=\"true\">\r\n        <sourceOutputDir name=\"target/generated-sources/annotations\" />\r\n        <sourceTestOutputDir name=\"target/generated-test-sources/test-annotations\" />\r\n        <outputRelativeToContentRoot value=\"true\" />\r\n        <module name=\"videominer\" />\r\n        <module name=\"PeerTubeMiner\" />\r\n      </profile>\r\n    </annotationProcessing>\r\n  </component>\r\n  <component name=\"JavacSettings\">\r\n    <option name=\"ADDITIONAL_OPTIONS_OVERRIDE\">\r\n      <module name=\"PeerTubeMiner\" options=\"-parameters\" />\r\n      <module name=\"videominer\" options=\"-parameters\" />\r\n    </option>\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/compiler.xml b/.idea/compiler.xml
+--- a/.idea/compiler.xml	(revision 92f47f023bdc616fee9416845844a334104a4fe7)
++++ b/.idea/compiler.xml	(date 1778143709884)
+@@ -1,3 +1,22 @@
++<<<<<<< HEAD
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="CompilerConfiguration">
++    <annotationProcessing>
++      <profile name="Maven default annotation processors profile" enabled="true">
++        <sourceOutputDir name="target/generated-sources/annotations" />
++        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
++        <outputRelativeToContentRoot value="true" />
++        <module name="videominer" />
++      </profile>
++    </annotationProcessing>
++  </component>
++  <component name="JavacSettings">
++    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
++      <module name="videominer" options="-parameters" />
++    </option>
++  </component>
++=======
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+   <component name="CompilerConfiguration">
+@@ -17,4 +36,5 @@
+       <module name="videominer" options="-parameters" />
+     </option>
+   </component>
++>>>>>>> 10e7581f7bb58f601125f4594c06a64bdcc7f95c
+ </project>
+\ No newline at end of file
+Index: .idea/modules.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"ProjectModuleManager\">\r\n    <modules>\r\n      <module fileurl=\"file://$PROJECT_DIR$/.idea/ProyectoIntegracion.iml\" filepath=\"$PROJECT_DIR$/.idea/ProyectoIntegracion.iml\" />\r\n    </modules>\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/modules.xml b/.idea/modules.xml
+--- a/.idea/modules.xml	(revision 92f47f023bdc616fee9416845844a334104a4fe7)
++++ b/.idea/modules.xml	(date 1778143709893)
+@@ -2,7 +2,7 @@
+ <project version="4">
+   <component name="ProjectModuleManager">
+     <modules>
+-      <module fileurl="file://$PROJECT_DIR$/.idea/ProyectoIntegracion.iml" filepath="$PROJECT_DIR$/.idea/ProyectoIntegracion.iml" />
++      <module fileurl="file://$PROJECT_DIR$/.idea/trabajo.iml" filepath="$PROJECT_DIR$/.idea/trabajo.iml" />
+     </modules>
+   </component>
+ </project>
+\ No newline at end of file
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"ExternalStorageConfigurationManager\" enabled=\"true\" />\r\n  <component name=\"MavenProjectsManager\">\r\n    <option name=\"originalFiles\">\r\n      <list>\r\n        <option value=\"$PROJECT_DIR$/VideoMiner/pom.xml\" />\r\n<<<<<<< HEAD\r\n=======\r\n        <option value=\"$PROJECT_DIR$/PeerTubeMiner/pom.xml\" />\r\n>>>>>>> 10e7581f7bb58f601125f4594c06a64bdcc7f95c\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"ProjectRootManager\" version=\"2\" project-jdk-name=\"openjdk-26\" project-jdk-type=\"JavaSDK\">\r\n    <output url=\"file://$PROJECT_DIR$/out\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/misc.xml b/.idea/misc.xml
+--- a/.idea/misc.xml	(revision 92f47f023bdc616fee9416845844a334104a4fe7)
++++ b/.idea/misc.xml	(date 1778143709900)
+@@ -1,18 +1,15 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+   <component name="ExternalStorageConfigurationManager" enabled="true" />
++  <component name="KubernetesApiProvider"><![CDATA[{}]]></component>
+   <component name="MavenProjectsManager">
+     <option name="originalFiles">
+       <list>
+-        <option value="$PROJECT_DIR$/VideoMiner/pom.xml" />
+-<<<<<<< HEAD
+-=======
++        <option value="$PROJECT_DIR$/DailyMotionMiner/pom.xml" />
+         <option value="$PROJECT_DIR$/PeerTubeMiner/pom.xml" />
+->>>>>>> 10e7581f7bb58f601125f4594c06a64bdcc7f95c
++        <option value="$PROJECT_DIR$/VideoMiner/pom.xml" />
+       </list>
+     </option>
+   </component>
+-  <component name="ProjectRootManager" version="2" project-jdk-name="openjdk-26" project-jdk-type="JavaSDK">
+-    <output url="file://$PROJECT_DIR$/out" />
+-  </component>
++  <component name="ProjectRootManager" version="2" project-jdk-name="openjdk-26" project-jdk-type="JavaSDK" />
+ </project>
+\ No newline at end of file
+Index: .idea/encodings.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"Encoding\">\r\n    <file url=\"file://$PROJECT_DIR$/PeerTubeMiner/src/main/java\" charset=\"UTF-8\" />\r\n    <file url=\"file://$PROJECT_DIR$/VideoMiner/src/main/java\" charset=\"UTF-8\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/encodings.xml b/.idea/encodings.xml
+--- a/.idea/encodings.xml	(revision 92f47f023bdc616fee9416845844a334104a4fe7)
++++ b/.idea/encodings.xml	(date 1778143709909)
+@@ -1,7 +1,15 @@
++<<<<<<< HEAD
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="Encoding">
++    <file url="file://$PROJECT_DIR$/VideoMiner/src/main/java" charset="UTF-8" />
++  </component>
++=======
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+   <component name="Encoding">
+     <file url="file://$PROJECT_DIR$/PeerTubeMiner/src/main/java" charset="UTF-8" />
+     <file url="file://$PROJECT_DIR$/VideoMiner/src/main/java" charset="UTF-8" />
+   </component>
++>>>>>>> 10e7581f7bb58f601125f4594c06a64bdcc7f95c
+ </project>
+\ No newline at end of file
