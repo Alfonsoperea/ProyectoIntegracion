@@ -4,28 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f4798b2f-fc27-45dd-9b25-76aff33dd403" name="Changes" comment="@bean de resttemplate">
-      <change afterPath="$PROJECT_DIR$/DailyMotionMiner/src/main/java/com/aiss/DailyMotionMiner/controller/ChannelController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DailyMotionMiner/src/main/java/com/aiss/DailyMotionMiner/etl/DailyMotionTransformer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DailyMotionMiner/src/main/java/com/aiss/DailyMotionMiner/exception/CaptionNotFoundException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DailyMotionMiner/src/main/java/com/aiss/DailyMotionMiner/exception/ChannelNotFoundException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DailyMotionMiner/src/main/java/com/aiss/DailyMotionMiner/exception/CommentNotFoundException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DailyMotionMiner/src/main/java/com/aiss/DailyMotionMiner/exception/GlobalExceptionHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DailyMotionMiner/src/main/java/com/aiss/DailyMotionMiner/exception/VideoNotFoundException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DailyMotionMiner/src/main/java/com/aiss/DailyMotionMiner/model/dailymotion/DMOwner.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DailyMotionMiner/src/main/java/com/aiss/DailyMotionMiner/model/dailymotion/DMSubtle.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DailyMotionMiner/src/main/java/com/aiss/DailyMotionMiner/model/dailymotion/DMSubtleSearch.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DailyMotionMiner/src/main/java/com/aiss/DailyMotionMiner/model/dailymotion/DMVideo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DailyMotionMiner/src/main/java/com/aiss/DailyMotionMiner/model/dailymotion/DMVideoSearch.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DailyMotionMiner/src/main/java/com/aiss/DailyMotionMiner/model/videominer/VMCaption.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DailyMotionMiner/src/main/java/com/aiss/DailyMotionMiner/model/videominer/VMChannel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DailyMotionMiner/src/main/java/com/aiss/DailyMotionMiner/model/videominer/VMComment.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DailyMotionMiner/src/main/java/com/aiss/DailyMotionMiner/model/videominer/VMUser.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DailyMotionMiner/src/main/java/com/aiss/DailyMotionMiner/model/videominer/VMVideo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DailyMotionMiner/src/main/java/com/aiss/DailyMotionMiner/service/ChannelService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DailyMotionMiner/src/main/java/com/aiss/DailyMotionMiner/service/SubtitleService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DailyMotionMiner/src/main/java/com/aiss/DailyMotionMiner/service/VideoService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="f4798b2f-fc27-45dd-9b25-76aff33dd403" name="Changes" comment="Implementacion completa de DailyMotionMiner. A groso modo, inspeccion requerida :)">
+      <change afterPath="$PROJECT_DIR$/DailyMotionMiner/src/main/java/com/aiss/DailyMotionMiner/config/RestTemplateConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DailyMotionMiner/src/main/java/com/aiss/DailyMotionMiner/DailyMotionMinerApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/DailyMotionMiner/src/main/java/com/aiss/DailyMotionMiner/DailyMotionMinerApplication.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -228,7 +209,15 @@
       <option name="project" value="LOCAL" />
       <updated>1778174392851</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Implementacion completa de DailyMotionMiner. A groso modo, inspeccion requerida :)">
+      <option name="closed" value="true" />
+      <created>1778194983848</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1778194983848</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -250,7 +239,8 @@
     <MESSAGE value="service" />
     <MESSAGE value="excepciones de peertube" />
     <MESSAGE value="@bean de resttemplate" />
-    <option name="LAST_COMMIT_MESSAGE" value="@bean de resttemplate" />
+    <MESSAGE value="Implementacion completa de DailyMotionMiner. A groso modo, inspeccion requerida :)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Implementacion completa de DailyMotionMiner. A groso modo, inspeccion requerida :)" />
   </component>
   <component name="github-copilot-workspace">
     <instructionFileLocations>
