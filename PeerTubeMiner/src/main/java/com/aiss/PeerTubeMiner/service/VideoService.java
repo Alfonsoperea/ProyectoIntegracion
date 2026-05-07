@@ -1,8 +1,6 @@
 package com.aiss.PeerTubeMiner.service;
 
-import com.aiss.PeerTubeMiner.exception.CommentNotFoundException;
 import com.aiss.PeerTubeMiner.exception.VideoNotFoundException;
-import com.aiss.PeerTubeMiner.model.peertube.CommentSearch;
 import com.aiss.PeerTubeMiner.model.peertube.VideoSearch;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;

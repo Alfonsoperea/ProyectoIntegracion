@@ -1,9 +1,6 @@
 package com.aiss.PeerTubeMiner.service;
 
-import com.aiss.PeerTubeMiner.exception.CaptionNotFoundException;
-import com.aiss.PeerTubeMiner.exception.ChannelNotFoundException;
 import com.aiss.PeerTubeMiner.exception.CommentNotFoundException;
-import com.aiss.PeerTubeMiner.model.peertube.CaptionSearch;
 import com.aiss.PeerTubeMiner.model.peertube.CommentSearch;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;

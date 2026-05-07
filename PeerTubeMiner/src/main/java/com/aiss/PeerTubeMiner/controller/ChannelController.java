@@ -1,5 +1,7 @@
 package com.aiss.PeerTubeMiner.controller;
 
+import com.aiss.PeerTubeMiner.exception.ChannelNotFoundException;
+import com.aiss.PeerTubeMiner.exception.VideoNotFoundException;
 import com.aiss.PeerTubeMiner.etl.transformer2;
 import com.aiss.PeerTubeMiner.model.peertube.Account;
 import com.aiss.PeerTubeMiner.model.peertube.Channel;
@@ -45,7 +47,7 @@ public class ChannelController {
     public VMChannel createChannel(
             @PathVariable String id,
             @RequestParam(defaultValue = "10") Integer maxVideos,
-            @RequestParam(defaultValue = "2") Integer maxComments) {
+            @RequestParam(defaultValue = "2") Integer maxComments) throws ChannelNotFoundException, VideoNotFoundException {
 
         // A. Obtener datos de PeerTube (Orquestación de servicios)
         VMChannel commonChannel = fetchAndTransform(id, maxVideos, maxComments);
@@ -60,7 +62,7 @@ public class ChannelController {
     public VMChannel getChannelTest(
             @PathVariable String id,
             @RequestParam(defaultValue = "10") Integer maxVideos,
-            @RequestParam(defaultValue = "2") Integer maxComments) {
+            @RequestParam(defaultValue = "2") Integer maxComments) throws ChannelNotFoundException, VideoNotFoundException {
 
         // Simplemente devuelve los datos transformados sin enviarlos a VideoMiner
         return fetchAndTransform(id, maxVideos, maxComments);
@@ -69,7 +71,7 @@ public class ChannelController {
     /**
      * Método auxiliar para centralizar la obtención y transformación de datos.
      */
-    private VMChannel fetchAndTransform(String id, Integer maxVideos, Integer maxComments) {
+    private VMChannel fetchAndTransform(String id, Integer maxVideos, Integer maxComments) throws ChannelNotFoundException, VideoNotFoundException {
         // 1. Obtener metadatos del Canal
         Account ptAccount = channelService.getAccount(id);
         Channel ptChannel = new Channel();
