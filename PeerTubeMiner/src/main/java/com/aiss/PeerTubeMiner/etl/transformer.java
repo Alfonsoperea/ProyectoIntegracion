@@ -1,5 +1,7 @@
 package com.aiss.PeerTubeMiner.etl;
 
+import aiss.videominer.model.Video;
+
 import java.util.stream.Collectors;
 
 @Service

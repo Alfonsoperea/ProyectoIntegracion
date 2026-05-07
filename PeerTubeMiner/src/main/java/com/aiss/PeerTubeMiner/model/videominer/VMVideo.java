@@ -1,4 +1,6 @@
 package com.aiss.PeerTubeMiner.model.videominer;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 
 import aiss.videominer.model.Caption;
 import aiss.videominer.model.Comment;

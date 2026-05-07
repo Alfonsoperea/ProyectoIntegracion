@@ -1,4 +1,5 @@
 package com.aiss.PeerTubeMiner.model.videominer;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class VMComment {
     @JsonProperty("id")
