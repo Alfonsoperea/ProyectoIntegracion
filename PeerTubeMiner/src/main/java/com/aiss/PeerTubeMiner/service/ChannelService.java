@@ -1,7 +1,7 @@
 package com.aiss.PeerTubeMiner.service;
 
 import com.aiss.PeerTubeMiner.exception.ChannelNotFoundException;
-import com.aiss.PeerTubeMiner.model.peertube.Account;
+import com.aiss.PeerTubeMiner.model.peertube.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -16,10 +16,10 @@ public class ChannelService {
     @Value("${peertubeminer.baseuri}")
     private String apiUrl;
 
-    public Account getAccount(String accountName) throws ChannelNotFoundException {
+    public User getUser(String accountName) throws ChannelNotFoundException {
         String url = apiUrl + "/accounts/" + accountName;
         try {
-            return restTemplate.getForObject(url, Account.class);
+            return restTemplate.getForObject(url, User.class);
         } catch (HttpClientErrorException e){
             throw new ChannelNotFoundException();
         }

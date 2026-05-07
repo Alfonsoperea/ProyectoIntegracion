@@ -3,8 +3,8 @@ package com.aiss.PeerTubeMiner.controller;
 import com.aiss.PeerTubeMiner.exception.ChannelNotFoundException;
 import com.aiss.PeerTubeMiner.exception.VideoNotFoundException;
 import com.aiss.PeerTubeMiner.etl.transformer2;
-import com.aiss.PeerTubeMiner.model.peertube.Account;
 import com.aiss.PeerTubeMiner.model.peertube.Channel;
+import com.aiss.PeerTubeMiner.model.peertube.User;
 import com.aiss.PeerTubeMiner.model.peertube.Video;
 import com.aiss.PeerTubeMiner.model.peertube.VideoSearch;
 import com.aiss.PeerTubeMiner.model.videominer.VMChannel;
@@ -73,12 +73,12 @@ public class ChannelController {
      */
     private VMChannel fetchAndTransform(String id, Integer maxVideos, Integer maxComments) throws ChannelNotFoundException, VideoNotFoundException {
         // 1. Obtener metadatos del Canal
-        Account ptAccount = channelService.getAccount(id);
+        User ptAccount = channelService.getUser(id);
         Channel ptChannel = new Channel();
         ptChannel.setId(ptAccount.getId() != null ? String.valueOf(ptAccount.getId()) : id);
-        ptChannel.setDisplayName(ptAccount.getDisplayName());
-        ptChannel.setDescription(ptAccount.getDescription());
-        ptChannel.setCreatedAt(ptAccount.getCreatedAt());
+        ptChannel.setDisplayName(ptAccount.getName());
+        ptChannel.setDescription(null);
+        ptChannel.setCreatedAt(null);
 
         // 2. Obtener los Vídeos del canal [cite: 19-21]
         VideoSearch videoSearch = videoService.getVideos(id, maxVideos);

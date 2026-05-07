@@ -15,7 +15,7 @@ public class User {
 
     @JsonProperty("user_link")
     private String url;
-
+    
     @JsonProperty("avatars")
     private List<Pictures> avatars;
 
