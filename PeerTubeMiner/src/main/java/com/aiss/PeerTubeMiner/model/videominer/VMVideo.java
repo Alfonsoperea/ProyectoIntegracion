@@ -1,11 +1,6 @@
 package com.aiss.PeerTubeMiner.model.videominer;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-
-import aiss.videominer.model.Caption;
-import aiss.videominer.model.Comment;
-import aiss.videominer.model.User;
-
 import java.util.List;
 
 public class VMVideo {
@@ -23,13 +18,13 @@ public class VMVideo {
     private String releaseTime;
 
     @JsonProperty("user")
-    private User author;
+    private VMUser author;
 
     @JsonProperty("comments")
-    private List<Comment> comments;
+    private List<VMComment> comments;
 
     @JsonProperty("captions")
-    private List<Caption> captions;
+    private List<VMCaption> captions;
 
     public String getId() {
         return id;
@@ -63,27 +58,27 @@ public class VMVideo {
         this.releaseTime = releaseTime;
     }
 
-    public User getAuthor() {
+    public VMUser getAuthor() {
         return author;
     }
 
-    public void setAuthor(User author) {
+    public void setAuthor(VMUser author) {
         this.author = author;
     }
 
-    public List<Comment> getComments() {
+    public List<VMComment> getComments() {
         return comments;
     }
 
-    public void setComments(List<Comment> comments) {
+    public void setComments(List<VMComment> comments) {
         this.comments = comments;
     }
 
-    public List<Caption> getCaptions() {
+    public List<VMCaption> getCaptions() {
         return captions;
     }
 
-    public void setCaptions(List<Caption> captions) {
+    public void setCaptions(List<VMCaption> captions) {
         this.captions = captions;
     }
 

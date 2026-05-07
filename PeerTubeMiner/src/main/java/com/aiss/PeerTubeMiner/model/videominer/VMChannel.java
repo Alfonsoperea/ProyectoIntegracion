@@ -1,8 +1,6 @@
 package com.aiss.PeerTubeMiner.model.videominer;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import aiss.videominer.model.Video;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,9 +18,9 @@ public class VMChannel {
     private String createdTime;
 
     @JsonProperty("videos")
-    private List<Video> videos;
+    private List<VMVideo> videos;
 
-    public Channel() {
+    public VMChannel() {
         this.videos = new ArrayList<>();
     }
 
@@ -58,11 +56,11 @@ public class VMChannel {
         this.createdTime = createdTime;
     }
 
-    public List<Video> getVideos() {
+    public List<VMVideo> getVideos() {
         return videos;
     }
 
-    public void setVideos(List<Video> videos) {
+    public void setVideos(List<VMVideo> videos) {
         this.videos = videos;
     }
 
