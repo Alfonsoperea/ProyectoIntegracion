@@ -1,14 +1,21 @@
 package com.aiss.PeerTubeMiner.controller;
 
+import com.aiss.PeerTubeMiner.exception.CaptionNotFoundException;
 import com.aiss.PeerTubeMiner.exception.ChannelNotFoundException;
+import com.aiss.PeerTubeMiner.exception.CommentNotFoundException;
 import com.aiss.PeerTubeMiner.exception.VideoNotFoundException;
 import com.aiss.PeerTubeMiner.etl.transformer2;
+import com.aiss.PeerTubeMiner.model.peertube.CaptionSearch;
 import com.aiss.PeerTubeMiner.model.peertube.Channel;
+import com.aiss.PeerTubeMiner.model.peertube.CommentSearch;
 import com.aiss.PeerTubeMiner.model.peertube.User;
 import com.aiss.PeerTubeMiner.model.peertube.Video;
 import com.aiss.PeerTubeMiner.model.peertube.VideoSearch;
 import com.aiss.PeerTubeMiner.model.videominer.VMChannel;
+import com.aiss.PeerTubeMiner.model.videominer.VMVideo;
+import com.aiss.PeerTubeMiner.service.CaptionService;
 import com.aiss.PeerTubeMiner.service.ChannelService;
+import com.aiss.PeerTubeMiner.service.CommentService;
 import com.aiss.PeerTubeMiner.service.VideoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -22,6 +29,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -32,6 +40,12 @@ public class ChannelController {
     private ChannelService channelService;
     @Autowired
     private VideoService videoService;
+
+    @Autowired
+    private CommentService commentService; // Servicio para traer los Comment threads [cite: 73]
+    @Autowired
+    private CaptionService captionService; // Servicio para traer las Captions [cite: 71]
+
     @Autowired
     private transformer2 transformer;
 
@@ -47,7 +61,7 @@ public class ChannelController {
     public VMChannel createChannel(
             @PathVariable String id,
             @RequestParam(defaultValue = "10") Integer maxVideos,
-            @RequestParam(defaultValue = "2") Integer maxComments) throws ChannelNotFoundException, VideoNotFoundException {
+            @RequestParam(defaultValue = "2") Integer maxComments) throws ChannelNotFoundException, VideoNotFoundException, CommentNotFoundException, CaptionNotFoundException {
 
         // A. Obtener datos de PeerTube (Orquestación de servicios)
         VMChannel commonChannel = fetchAndTransform(id, maxVideos, maxComments);
@@ -62,7 +76,7 @@ public class ChannelController {
     public VMChannel getChannelTest(
             @PathVariable String id,
             @RequestParam(defaultValue = "10") Integer maxVideos,
-            @RequestParam(defaultValue = "2") Integer maxComments) throws ChannelNotFoundException, VideoNotFoundException {
+            @RequestParam(defaultValue = "2") Integer maxComments) throws ChannelNotFoundException, VideoNotFoundException, CommentNotFoundException, CaptionNotFoundException {
 
         // Simplemente devuelve los datos transformados sin enviarlos a VideoMiner
         return fetchAndTransform(id, maxVideos, maxComments);
@@ -71,20 +85,28 @@ public class ChannelController {
     /**
      * Método auxiliar para centralizar la obtención y transformación de datos.
      */
-    private VMChannel fetchAndTransform(String id, Integer maxVideos, Integer maxComments) throws ChannelNotFoundException, VideoNotFoundException {
-        // 1. Obtener metadatos del Canal
+    private VMChannel fetchAndTransform(String id, Integer maxVideos, Integer maxComments) throws ChannelNotFoundException, VideoNotFoundException, CommentNotFoundException, CaptionNotFoundException {
+        // 1. Obtener metadatos del Canal/Usuario
         User ptAccount = channelService.getUser(id);
         Channel ptChannel = new Channel();
         ptChannel.setId(ptAccount.getId() != null ? String.valueOf(ptAccount.getId()) : id);
         ptChannel.setDisplayName(ptAccount.getName());
-        ptChannel.setDescription(null);
-        ptChannel.setCreatedAt(null);
-
-        // 2. Obtener los Vídeos del canal [cite: 19-21]
+    
+        // 2. Obtener los Vídeos del canal
         VideoSearch videoSearch = videoService.getVideos(id, maxVideos);
         List<Video> ptVideos = videoSearch.getData();
-
-        // 3. Transformar al modelo común de VideoMiner
-        return transformer.transformChannel(ptChannel, ptVideos);
+    
+        // 3. Crear VMChannel y transformar cada vídeo con comments/captions del servicio
+        VMChannel vmChannel = transformer.transformChannel(ptChannel, null);
+        List<VMVideo> vmVideos = new ArrayList<>();
+        if (ptVideos != null) {
+            for (Video video : ptVideos) {
+                CommentSearch commentSearch = commentService.getComments(video.getId(), maxComments);
+                CaptionSearch captionSearch = captionService.getCaptions(video.getId());
+                vmVideos.add(transformer.transformVideo(video, commentSearch.getData(), captionSearch.getData()));
+            }
+        }
+        vmChannel.setVideos(vmVideos);
+        return vmChannel;
     }
 }
