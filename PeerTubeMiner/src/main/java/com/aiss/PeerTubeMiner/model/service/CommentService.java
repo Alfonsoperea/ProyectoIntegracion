@@ -7,14 +7,15 @@ import org.springframework.web.client.RestTemplate;
 
 @Service
 public class CommentService {
-
     @Autowired
     private RestTemplate restTemplate;
 
     private final String API_URL = "https://peertube2.cpy.re/api/v1";
 
     public CommentSearch getComments(String videoUuid, int maxComments) {
+        // En PeerTube los comentarios se sacan por el UUID del video
         String url = API_URL + "/videos/" + videoUuid + "/comment-threads?count=" + maxComments;
+        // Coincide con tu clase CommentSearch.java
         return restTemplate.getForObject(url, CommentSearch.class);
     }
 }

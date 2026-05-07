@@ -7,7 +7,6 @@ import org.springframework.web.client.RestTemplate;
 
 @Service
 public class ChannelService {
-
     @Autowired
     private RestTemplate restTemplate;
 
@@ -15,6 +14,7 @@ public class ChannelService {
 
     public Account getAccount(String accountName) {
         String url = API_URL + "/accounts/" + accountName;
+        // Coincide con tu clase Account.java
         return restTemplate.getForObject(url, Account.class);
     }
 }

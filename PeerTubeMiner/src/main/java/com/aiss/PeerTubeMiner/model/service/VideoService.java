@@ -7,7 +7,6 @@ import org.springframework.web.client.RestTemplate;
 
 @Service
 public class VideoService {
-
     @Autowired
     private RestTemplate restTemplate;
 
@@ -15,6 +14,7 @@ public class VideoService {
 
     public VideoSearch getVideos(String accountName, int maxVideos) {
         String url = API_URL + "/accounts/" + accountName + "/videos?count=" + maxVideos;
+        // Coincide con tu clase VideoSearch.java
         return restTemplate.getForObject(url, VideoSearch.class);
     }
 }
