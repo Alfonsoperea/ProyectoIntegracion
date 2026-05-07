@@ -1,7 +1,18 @@
 
+<<<<<<< HEAD
 package com.aiss.PeerTubeMiner.model.peertube;
 
 import javax.annotation.processing.Generated;
+=======
+package com.aiss.PeerTube;
+
+import java.util.LinkedHashMap;
+import java.util.Map;
+import javax.annotation.processing.Generated;
+import com.fasterxml.jackson.annotation.JsonAnyGetter;
+import com.fasterxml.jackson.annotation.JsonAnySetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+>>>>>>> 6aea09f5d34e9167d782e59073272f85daabb7e8
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -18,6 +29,11 @@ public class Language {
     private String id;
     @JsonProperty("label")
     private String label;
+<<<<<<< HEAD
+=======
+    @JsonIgnore
+    private Map<String, Object> additionalProperties = new LinkedHashMap<String, Object>();
+>>>>>>> 6aea09f5d34e9167d782e59073272f85daabb7e8
 
     @JsonProperty("id")
     public String getId() {
@@ -39,6 +55,7 @@ public class Language {
         this.label = label;
     }
 
+<<<<<<< HEAD
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -57,6 +74,16 @@ public class Language {
             sb.append(']');
         }
         return sb.toString();
+=======
+    @JsonAnyGetter
+    public Map<String, Object> getAdditionalProperties() {
+        return this.additionalProperties;
+    }
+
+    @JsonAnySetter
+    public void setAdditionalProperty(String name, Object value) {
+        this.additionalProperties.put(name, value);
+>>>>>>> 6aea09f5d34e9167d782e59073272f85daabb7e8
     }
 
 }
