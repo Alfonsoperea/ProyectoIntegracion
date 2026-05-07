@@ -1,6 +1,6 @@
 package aiss.videominer.controller;
 
-import aiss.videominer.exceptions.ChannelNotFoundException;
+import aiss.videominer.exception.ChannelNotFoundException;
 import aiss.videominer.model.Channel;
 import aiss.videominer.repository.ChannelRepository;
 import jakarta.validation.Valid;

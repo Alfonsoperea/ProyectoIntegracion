@@ -1,6 +1,6 @@
 package aiss.videominer.controller;
 
-import aiss.videominer.exceptions.VideoNotFoundException;
+import aiss.videominer.exception.VideoNotFoundException;
 import aiss.videominer.model.Video;
 import aiss.videominer.repository.VideoRepository;
 import org.springframework.beans.factory.annotation.Autowired;

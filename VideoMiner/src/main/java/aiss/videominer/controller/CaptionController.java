@@ -4,8 +4,8 @@ import aiss.videominer.model.Video;
 import aiss.videominer.model.Caption;
 import aiss.videominer.repository.CaptionRepository;
 import aiss.videominer.repository.VideoRepository;
-import aiss.videominer.exceptions.CaptionNotFoundException;
-import aiss.videominer.exceptions.VideoNotFoundException;
+import aiss.videominer.exception.CaptionNotFoundException;
+import aiss.videominer.exception.VideoNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

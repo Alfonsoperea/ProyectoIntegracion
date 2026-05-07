@@ -1,4 +1,4 @@
-package aiss.videominer.exceptions;
+package aiss.videominer.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

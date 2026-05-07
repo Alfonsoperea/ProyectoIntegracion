@@ -1,4 +1,4 @@
-package aiss.videominer.exceptions;
+package aiss.videominer.exception;
 
 import java.util.HashMap;
 import java.util.List;
