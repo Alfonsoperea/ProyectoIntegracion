@@ -5,6 +5,10 @@
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/VideoMiner/pom.xml" />
+<<<<<<< HEAD
+=======
+        <option value="$PROJECT_DIR$/PeerTubeMiner/pom.xml" />
+>>>>>>> 10e7581f7bb58f601125f4594c06a64bdcc7f95c
       </list>
     </option>
   </component>
