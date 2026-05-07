@@ -1,7 +1,8 @@
-package com.aiss.PeerTubeMiner.model.service;
+package com.aiss.PeerTubeMiner.service;
 
 import com.aiss.PeerTubeMiner.model.peertube.VideoSearch;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -11,10 +12,11 @@ public class VideoService {
     @Autowired
     private RestTemplate restTemplate;
 
-    private final String API_URL = "https://peertube2.cpy.re/api/v1";
+    @Value("${peertubeminer.baseuri}")
+    private String apiUrl;
 
     public VideoSearch getVideos(String accountName, int maxVideos) {
-        String url = API_URL + "/accounts/" + accountName + "/videos?count=" + maxVideos;
+        String url = apiUrl + "/accounts/" + accountName + "/videos?count=" + maxVideos;
         return restTemplate.getForObject(url, VideoSearch.class);
     }
 }
