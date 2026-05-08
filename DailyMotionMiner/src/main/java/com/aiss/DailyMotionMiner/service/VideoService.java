@@ -13,13 +13,12 @@ import org.springframework.web.client.RestTemplate;
  *
  * Endpoint utilizado:
  *   GET https://api.dailymotion.com/user/{userId}/videos
- *       ?fields=id,title,description,created_time,owner,owner.id,owner.screenname,owner.url,owner.avatar_120_url
+ *       ?fields=id,title,description,created_time,owner,tags
  *       &limit={maxVideos}
  *
  * Notas de la API de Dailymotion:
  *  - El parámetro "limit" controla cuántos vídeos devuelve por página (máximo 100).
- *  - Se usa "fields" para seleccionar exactamente qué campos queremos, incluyendo
- *    sub-campos del objeto "owner" con notación de punto.
+ *  - "fields" es necesario para que la API devuelva owner y tags de forma consistente.
  *  - La respuesta incluye "list" (array de vídeos), "total" y "has_more".
  *  - No se requiere autenticación para vídeos públicos.
  */
@@ -44,10 +43,7 @@ public class VideoService {
      * @throws VideoNotFoundException si el usuario no tiene vídeos o no existe
      */
     public DMVideoSearch getVideos(String userId, int maxVideos) throws VideoNotFoundException {
-        // Campos del vídeo + sub-campos del owner para obtener datos del autor
-        String fields = "id,title,description,created_time,"
-                + "owner,owner.id,owner.screenname,owner.url,owner.avatar_120_url";
-
+        String fields = "id,title,description,created_time,owner,tags";
         String url = baseUri + "/user/" + userId + "/videos"
                 + "?fields=" + fields
                 + "&limit=" + maxVideos;

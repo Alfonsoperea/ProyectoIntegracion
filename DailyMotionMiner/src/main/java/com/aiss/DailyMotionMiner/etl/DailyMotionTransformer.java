@@ -2,9 +2,11 @@ package com.aiss.DailyMotionMiner.etl;
 
 
 import com.aiss.DailyMotionMiner.model.dailymotion.DMOwner;
+import com.aiss.DailyMotionMiner.model.dailymotion.DMSubtle;
 import com.aiss.DailyMotionMiner.model.dailymotion.DMVideo;
 import com.aiss.DailyMotionMiner.model.videominer.VMCaption;
 import com.aiss.DailyMotionMiner.model.videominer.VMChannel;
+import com.aiss.DailyMotionMiner.model.videominer.VMComment;
 import com.aiss.DailyMotionMiner.model.videominer.VMUser;
 import com.aiss.DailyMotionMiner.model.videominer.VMVideo;
 import org.springframework.stereotype.Component;
@@ -73,7 +75,7 @@ public class DailyMotionTransformer {
      * @param dmSubtitles lista de subtítulos del vídeo (puede ser null o vacía)
      * @return VMVideo listo para incluir en el canal
      */
-    public VMVideo transformVideo(DMVideo dmVideo, List<com.aiss.DailyMotionMiner.model.dailymotion.DMSubtle> dmSubtitles) {
+    public VMVideo transformVideo(DMVideo dmVideo, List<DMSubtle> dmSubtitles) {
         VMVideo vmVideo = new VMVideo();
         if (dmVideo == null) return vmVideo;
 
@@ -85,10 +87,20 @@ public class DailyMotionTransformer {
         vmVideo.setReleaseTime(toIsoString(dmVideo.getCreatedTime()));
 
         // Transformar el propietario al modelo VMUser
-        vmVideo.setAuthor(transformOwner(dmVideo.buildOwner()));
+        vmVideo.setAuthor(transformOwner(dmVideo.getOwner()));
 
-        // Dailymotion no ofrece comentarios en la API pública sin auth → lista vacía
-        vmVideo.setComments(Collections.emptyList());
+        // En Dailymotion usamos tags como comentarios para el modelo común de VideoMiner.
+        List<VMComment> comments = new ArrayList<>();
+        if (dmVideo.getTags() != null) {
+            for (String tag : dmVideo.getTags()) {
+                VMComment comment = new VMComment();
+                comment.setId(null);
+                comment.setText(tag);
+                comment.setCreatedOn(null);
+                comments.add(comment);
+            }
+        }
+        vmVideo.setComments(comments);
 
         // Transformar subtítulos a captions
         if (dmSubtitles != null && !dmSubtitles.isEmpty()) {

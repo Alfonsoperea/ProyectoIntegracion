@@ -16,7 +16,7 @@ import org.springframework.web.client.RestTemplate;
  *
  * Endpoint utilizado:
  *   GET https://api.dailymotion.com/user/{userId}
- *       ?fields=id,screenname,description,created_time,url
+ *       ?fields=id,screenname,description,created_time,url,avatar_120_url
  *
  * No requiere autenticación para datos públicos.
  */
@@ -37,14 +37,8 @@ public class ChannelService {
      * @throws ChannelNotFoundException si el usuario no existe (404 de la API)
      */
     public DMOwner getChannel(String userId) throws ChannelNotFoundException {
-        // Campos solicitados a la API:
-        //   id            → ID numérico del canal
-        //   screenname    → nombre visible
-        //   description   → descripción del canal
-        //   created_time  → fecha de creación (Unix timestamp)
-        //   url           → URL del perfil
         String url = baseUri + "/user/" + userId
-                + "?fields=id,screenname,description,created_time,url";
+                + "?fields=id,screenname,description,created_time,url,avatar_120_url";
         try {
             return restTemplate.getForObject(url, DMOwner.class);
         } catch (HttpClientErrorException e) {

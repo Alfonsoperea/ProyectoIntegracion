@@ -1,6 +1,7 @@
 package com.aiss.DailyMotionMiner.controller;
 
 import com.aiss.DailyMotionMiner.etl.DailyMotionTransformer;
+import com.aiss.DailyMotionMiner.exception.CaptionNotFoundException;
 import com.aiss.DailyMotionMiner.exception.ChannelNotFoundException;
 import com.aiss.DailyMotionMiner.exception.VideoNotFoundException;
 import com.aiss.DailyMotionMiner.model.dailymotion.DMOwner;
@@ -84,7 +85,7 @@ public class ChannelController {
     public VMChannel getChannel(
             @PathVariable String userId,
             @RequestParam(defaultValue = "0") int maxVideos)
-            throws ChannelNotFoundException, VideoNotFoundException {
+            throws ChannelNotFoundException, VideoNotFoundException, CaptionNotFoundException {
 
         int limit = maxVideos > 0 ? maxVideos : defaultMaxVideos;
         return fetchAndTransform(userId, limit);
@@ -106,7 +107,7 @@ public class ChannelController {
     public VMChannel createChannel(
             @PathVariable String userId,
             @RequestParam(defaultValue = "0") int maxVideos)
-            throws ChannelNotFoundException, VideoNotFoundException {
+            throws ChannelNotFoundException, VideoNotFoundException, CaptionNotFoundException {
 
         int limit = maxVideos > 0 ? maxVideos : defaultMaxVideos;
 
@@ -127,7 +128,7 @@ public class ChannelController {
      * @return VMChannel transformado
      */
     private VMChannel fetchAndTransform(String userId, int maxVideos)
-            throws ChannelNotFoundException, VideoNotFoundException {
+            throws ChannelNotFoundException, VideoNotFoundException, CaptionNotFoundException {
 
         // ── EXTRACT ──────────────────────────────────────────────────────────────
 

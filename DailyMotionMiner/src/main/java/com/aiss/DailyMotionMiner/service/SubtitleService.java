@@ -1,13 +1,12 @@
 package com.aiss.DailyMotionMiner.service;
 
+import com.aiss.DailyMotionMiner.exception.CaptionNotFoundException;
 import com.aiss.DailyMotionMiner.model.dailymotion.DMSubtleSearch;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
-
-import java.util.Collections;
 
 /**
  * Servicio para recuperar los subtítulos de un vídeo de Dailymotion.
@@ -40,22 +39,17 @@ public class SubtitleService {
      * @param videoId ID del vídeo en Dailymotion
      * @return DMSubtleSearch con la lista de subtítulos; si hay error, respuesta vacía
      */
-    public DMSubtleSearch getSubtitles(String videoId) {
+    public DMSubtleSearch getSubtitles(String videoId) throws CaptionNotFoundException {
         String url = baseUri + "/video/" + videoId + "/subtitles"
-                + "?fields=id,language,language_label,url";
+                + "?fields=id,language,url";
         try {
             DMSubtleSearch result = restTemplate.getForObject(url, DMSubtleSearch.class);
-            return result != null ? result : emptyResult();
+            if (result == null) {
+                throw new CaptionNotFoundException();
+            }
+            return result;
         } catch (HttpClientErrorException e) {
-            // Si el vídeo no tiene subtítulos o hay un error 404, retornamos vacío
-            return emptyResult();
+            throw new CaptionNotFoundException();
         }
-    }
-
-    private DMSubtleSearch emptyResult() {
-        DMSubtleSearch empty = new DMSubtleSearch();
-        empty.setList(Collections.emptyList());
-        empty.setHasMore(false);
-        return empty;
     }
 }
