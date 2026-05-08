@@ -12,8 +12,7 @@ public class User {
 
     @Id
     @JsonProperty("id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private String id;
 
     @JsonProperty("name")
     private String name;
@@ -24,11 +23,11 @@ public class User {
     @JsonProperty("picture_link")
     private String picture_link;
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

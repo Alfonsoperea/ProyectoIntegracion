@@ -73,7 +73,7 @@ public class transformer2 {
             return user;
         }
 
-        user.setId(parseLongSafe(ptAccount.getId()));
+        user.setId(ptAccount.getId());
         user.setName(ptAccount.getName());
         user.setUser_link(ptAccount.getUrl());
 
@@ -109,16 +109,5 @@ public class transformer2 {
             caption.setLanguage(ptCaption.getLanguage().getLabel());
         }
         return caption;
-    }
-
-    private Long parseLongSafe(String value) { //esto para convertor str a long
-        if (value == null || value.isBlank()) {
-            return null;
-        }
-        try {
-            return Long.valueOf(value);
-        } catch (NumberFormatException ex) {
-            return null;
-        }
     }
 }
