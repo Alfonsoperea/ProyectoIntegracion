@@ -151,7 +151,7 @@ public class ChannelController {
                         subtitleSearch.getList();
 
                 // Transformar vídeo + subtítulos → VMVideo
-                VMVideo vmVideo = transformer.transformVideo(dmVideo, subtitles);
+                VMVideo vmVideo = transformer.transformVideo(dmVideo, subtitles, dmChannel);
                 vmVideos.add(vmVideo);
             }
         }

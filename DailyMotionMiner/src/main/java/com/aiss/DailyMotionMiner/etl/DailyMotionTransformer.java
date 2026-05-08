@@ -76,6 +76,10 @@ public class DailyMotionTransformer {
      * @return VMVideo listo para incluir en el canal
      */
     public VMVideo transformVideo(DMVideo dmVideo, List<DMSubtle> dmSubtitles) {
+        return transformVideo(dmVideo, dmSubtitles, dmVideo != null ? dmVideo.getOwner() : null);
+    }
+
+    public VMVideo transformVideo(DMVideo dmVideo, List<DMSubtle> dmSubtitles, DMOwner channelOwner) {
         VMVideo vmVideo = new VMVideo();
         if (dmVideo == null) return vmVideo;
 
@@ -86,8 +90,8 @@ public class DailyMotionTransformer {
         // releaseTime usa el created_time del vídeo (fecha de subida)
         vmVideo.setReleaseTime(toIsoString(dmVideo.getCreatedTime()));
 
-        // Transformar el propietario al modelo VMUser
-        vmVideo.setAuthor(transformOwner(dmVideo.getOwner()));
+        // En Dailymotion el userId del autor coincide con el id del canal consultado.
+        vmVideo.setAuthor(transformOwner(channelOwner));
 
         // En Dailymotion usamos tags como comentarios para el modelo común de VideoMiner.
         List<VMComment> comments = new ArrayList<>();
@@ -128,7 +132,7 @@ public class DailyMotionTransformer {
         VMUser vmUser = new VMUser();
         if (owner == null) return vmUser;
 
-        vmUser.setId(parseLongSafe(owner.getId()));
+        vmUser.setId(owner.getId());
         vmUser.setName(owner.getScreenname());
         vmUser.setUser_link(owner.getUrl());
         vmUser.setPicture_link(owner.getAvatarUrl());
@@ -175,19 +179,6 @@ public class DailyMotionTransformer {
     private String toIsoString(Long unixSeconds) {
         if (unixSeconds == null) return null;
         return ISO_FORMATTER.format(Instant.ofEpochSecond(unixSeconds));
-    }
-
-    /**
-     * Convierte un String a Long de forma segura, devolviendo null si falla.
-     * Necesario porque el ID del owner de Dailymotion llega como String en el JSON.
-     */
-    private Long parseLongSafe(String value) {
-        if (value == null || value.isBlank()) return null;
-        try {
-            return Long.parseLong(value);
-        } catch (NumberFormatException e) {
-            return null;
-        }
     }
 
     private String readString(Object target, String methodName) {

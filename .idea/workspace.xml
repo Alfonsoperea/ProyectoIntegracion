@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f4798b2f-fc27-45dd-9b25-76aff33dd403" name="Changes" comment="Implementacion completa de DailyMotionMiner. A groso modo, inspeccion requerida :)">
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="f4798b2f-fc27-45dd-9b25-76aff33dd403" name="Changes" comment="Implementacion completa de DailyMotionMiner. A groso modo, inspeccion requerida :)" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -124,6 +121,7 @@
         <entry key="SpringBootApplicationConfigurationType">
           <value>
             <map>
+              <entry key="DailyMotionMinerApplication" value="STOPPED" />
               <entry key="PeerTubeMinerApplication" value="STOPPED" />
             </map>
           </value>
