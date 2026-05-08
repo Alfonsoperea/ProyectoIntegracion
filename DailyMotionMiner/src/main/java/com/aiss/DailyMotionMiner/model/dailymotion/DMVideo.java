@@ -3,6 +3,7 @@ package com.aiss.DailyMotionMiner.model.dailymotion;
 
 import java.util.List;
 import javax.annotation.processing.Generated;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -13,7 +14,10 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
         "title",
         "description",
         "created_time",
-        "owner",
+        "owner.id",
+        "owner.screenname",
+        "owner.url",
+        "owner.avatar_120_url",
         "tags"
 })
 @Generated("jsonschema2pojo")
@@ -27,8 +31,14 @@ public class DMVideo {
     private String description;
     @JsonProperty("created_time")
     private Long createdTime;
-    @JsonProperty("owner")
-    private DMOwner owner;
+    @JsonProperty("owner.id")
+    private String ownerId;
+    @JsonProperty("owner.screenname")
+    private String ownerScreenname;
+    @JsonProperty("owner.url")
+    private String ownerUrl;
+    @JsonProperty("owner.avatar_120_url")
+    private String ownerAvatarUrl;
     @JsonProperty("tags")
     private List<String> tags;
 
@@ -72,14 +82,57 @@ public class DMVideo {
         this.createdTime = createdTime;
     }
 
-    @JsonProperty("owner")
+    @JsonIgnore
     public DMOwner getOwner() {
+        if (ownerId == null && ownerScreenname == null && ownerUrl == null && ownerAvatarUrl == null) {
+            return null;
+        }
+        DMOwner owner = new DMOwner();
+        owner.setId(ownerId);
+        owner.setScreenname(ownerScreenname);
+        owner.setUrl(ownerUrl);
+        owner.setAvatarUrl(ownerAvatarUrl);
         return owner;
     }
 
-    @JsonProperty("owner")
-    public void setOwner(DMOwner owner) {
-        this.owner = owner;
+    @JsonProperty("owner.id")
+    public String getOwnerId() {
+        return ownerId;
+    }
+
+    @JsonProperty("owner.id")
+    public void setOwnerId(String ownerId) {
+        this.ownerId = ownerId;
+    }
+
+    @JsonProperty("owner.screenname")
+    public String getOwnerScreenname() {
+        return ownerScreenname;
+    }
+
+    @JsonProperty("owner.screenname")
+    public void setOwnerScreenname(String ownerScreenname) {
+        this.ownerScreenname = ownerScreenname;
+    }
+
+    @JsonProperty("owner.url")
+    public String getOwnerUrl() {
+        return ownerUrl;
+    }
+
+    @JsonProperty("owner.url")
+    public void setOwnerUrl(String ownerUrl) {
+        this.ownerUrl = ownerUrl;
+    }
+
+    @JsonProperty("owner.avatar_120_url")
+    public String getOwnerAvatarUrl() {
+        return ownerAvatarUrl;
+    }
+
+    @JsonProperty("owner.avatar_120_url")
+    public void setOwnerAvatarUrl(String ownerAvatarUrl) {
+        this.ownerAvatarUrl = ownerAvatarUrl;
     }
 
     @JsonProperty("tags")
@@ -112,9 +165,9 @@ public class DMVideo {
         sb.append('=');
         sb.append(((this.createdTime == null)?"<null>":this.createdTime));
         sb.append(',');
-        sb.append("owner");
+        sb.append("ownerId");
         sb.append('=');
-        sb.append(((this.owner == null)?"<null>":this.owner));
+        sb.append(((this.ownerId == null)?"<null>":this.ownerId));
         sb.append(',');
         sb.append("tags");
         sb.append('=');

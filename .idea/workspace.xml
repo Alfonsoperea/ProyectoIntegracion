@@ -5,8 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f4798b2f-fc27-45dd-9b25-76aff33dd403" name="Changes" comment="Implementacion completa de DailyMotionMiner. A groso modo, inspeccion requerida :)">
-      <change afterPath="$PROJECT_DIR$/DailyMotionMiner/src/main/java/com/aiss/DailyMotionMiner/config/RestTemplateConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DailyMotionMiner/src/main/java/com/aiss/DailyMotionMiner/DailyMotionMinerApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/DailyMotionMiner/src/main/java/com/aiss/DailyMotionMiner/DailyMotionMinerApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -76,6 +76,7 @@
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "Spring Boot.DailyMotionMinerApplication.executor": "Run",
     "Spring Boot.PeerTubeMinerApplication.executor": "Run",
     "Spring Boot.VideominerApplication.executor": "Run",
     "codeWithMe.voiceChat.enabledByDefault": "false",
@@ -130,7 +131,7 @@
       </map>
     </option>
   </component>
-  <component name="RunManager" selected="Spring Boot.PeerTubeMinerApplication">
+  <component name="RunManager" selected="Spring Boot.DailyMotionMinerApplication">
     <configuration name="DailyMotionMinerApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="DailyMotionMiner" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.aiss.DailyMotionMiner.DailyMotionMinerApplication" />

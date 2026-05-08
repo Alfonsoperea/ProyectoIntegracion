@@ -43,7 +43,7 @@ public class VideoService {
      * @throws VideoNotFoundException si el usuario no tiene vídeos o no existe
      */
     public DMVideoSearch getVideos(String userId, int maxVideos) throws VideoNotFoundException {
-        String fields = "id,title,description,created_time,owner,tags";
+        String fields = "id,title,description,created_time,owner.id,owner.screenname,owner.url,owner.avatar_120_url,tags";
         String url = baseUri + "/user/" + userId + "/videos"
                 + "?fields=" + fields
                 + "&limit=" + maxVideos;
