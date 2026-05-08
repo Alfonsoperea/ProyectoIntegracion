@@ -12,6 +12,9 @@ public class Caption {
     @JsonProperty("captionPath")
     private String captionPath;
 
+    @JsonProperty("fileUrl")
+    private String fileUrl;
+
     @JsonProperty("language")
     private Language language;
 
@@ -29,6 +32,14 @@ public class Caption {
 
     public void setCaptionPath(String captionPath) {
         this.captionPath = captionPath;
+    }
+
+    public String getFileUrl() {
+        return fileUrl;
+    }
+
+    public void setFileUrl(String fileUrl) {
+        this.fileUrl = fileUrl;
     }
 
     public Language getLanguage() {

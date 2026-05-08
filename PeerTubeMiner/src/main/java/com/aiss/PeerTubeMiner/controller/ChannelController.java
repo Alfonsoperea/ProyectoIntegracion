@@ -89,8 +89,10 @@ public class ChannelController {
         // 1. Obtener metadatos del Canal/Usuario
         User ptAccount = channelService.getUser(accountName);
         Channel ptChannel = new Channel();
-        ptChannel.setId(ptAccount.getId() != null ? String.valueOf(ptAccount.getId()) : accountName);
+        ptChannel.setId(ptAccount.getId() != null ? ptAccount.getId() : accountName);
         ptChannel.setDisplayName(ptAccount.getName());
+        ptChannel.setDescription(ptAccount.getDescription());
+        ptChannel.setCreatedAt(ptAccount.getCreatedAt());
     
         // 2. Obtener los Vídeos del canal
         VideoSearch videoSearch = videoService.getVideos(accountName, maxVideos);

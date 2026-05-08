@@ -13,8 +13,17 @@ public class User {
     @JsonProperty("name")
     private String name;
 
-    @JsonProperty("user_link")
+    @JsonProperty("displayName")
+    private String displayName;
+
+    @JsonProperty("url")
     private String url;
+
+    @JsonProperty("description")
+    private String description;
+
+    @JsonProperty("createdAt")
+    private String createdAt;
     
     @JsonProperty("avatars")
     private List<Pictures> avatars;
@@ -35,12 +44,36 @@ public class User {
         this.name = name;
     }
 
+    public String getDisplayName() {
+        return displayName;
+    }
+
+    public void setDisplayName(String displayName) {
+        this.displayName = displayName;
+    }
+
     public String getUrl() {
         return url;
     }
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
     }
 
     public List<Pictures> getAvatars() {

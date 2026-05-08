@@ -28,7 +28,7 @@ public class transformer2 {
 
         channel.setId(String.valueOf(ptChannel.getId()));
         channel.setName(ptChannel.getDisplayName());
-        channel.setDescription(ptChannel.getDescription());
+        channel.setDescription(ptChannel.getDescription() != null ? ptChannel.getDescription() : "");
         channel.setCreatedTime(ptChannel.getCreatedAt());
 
         List<VMVideo> commonVideos = (ptVideos == null ? Collections.<Video>emptyList() : ptVideos)
@@ -103,8 +103,8 @@ public class transformer2 {
             return caption;
         }
 
-        caption.setId(String.valueOf(ptCaption.getId()));
-        caption.setName(ptCaption.getCaptionPath());
+        caption.setId(ptCaption.getId());
+        caption.setName(ptCaption.getFileUrl() != null ? ptCaption.getFileUrl() : ptCaption.getCaptionPath());
         if (ptCaption.getLanguage() != null) {
             caption.setLanguage(ptCaption.getLanguage().getLabel());
         }

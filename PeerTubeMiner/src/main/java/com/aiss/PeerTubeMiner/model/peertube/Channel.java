@@ -10,13 +10,13 @@ public class Channel {
     @JsonProperty("id")
     private String id;
 
-    @JsonProperty("name")
+    @JsonProperty("displayName")
     private String displayName;
 
     @JsonProperty("description")
     private String description;
 
-    @JsonProperty("createdTime")
+    @JsonProperty("createdAt")
     private String createdAt;
 
     public String getId() {

@@ -12,10 +12,10 @@ public class Video {
     @JsonProperty("name")
     private String name;
 
-    @JsonProperty("description")
+    @JsonProperty("truncatedDescription")
     private String truncatedDescription;
 
-    @JsonProperty("releaseTime")
+    @JsonProperty("publishedAt")
     private String publishedAt;
 
     @JsonProperty("account")
