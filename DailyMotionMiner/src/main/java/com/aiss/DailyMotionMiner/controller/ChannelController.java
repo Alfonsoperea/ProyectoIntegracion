@@ -37,7 +37,8 @@ import java.util.List;
  *                                  Devuelve 201 CREATED con el objeto enviado.
  *
  * Parámetros de query opcionales:
- *   maxVideos → número máximo de vídeos a recuperar (por defecto: valor de application.properties)
+ *   maxVideos → número máximo de vídeos a recuperar por página (por defecto: application.properties)
+ *   maxPages  → número máximo de páginas a recorrer (por defecto: application.properties)
  *
  * Flujo ETL completo (POST):
  *   1. [Extract] ChannelService  → obtiene metadatos del canal (usuario) desde Dailymotion
@@ -73,22 +74,28 @@ public class ChannelController {
     @Value("${dailymotionminer.maxVideos}")
     private int defaultMaxVideos;
 
+    /** Límite por defecto de páginas a recorrer */
+    @Value("${dailymotionminer.maxPages}")
+    private int defaultMaxPages;
+
     // ─── GET: operación de solo lectura para pruebas ─────────────────────────────
 
     /**
      * Devuelve el canal transformado al formato VideoMiner SIN enviarlo.
      * Útil para depuración e inspección manual antes de enviar.
      *
-     * Ejemplo: GET http://localhost:8081/dailymotion/Euronews?maxVideos=5
+     * Ejemplo: GET http://localhost:8081/dailymotion/Euronews?maxVideos=5&maxPages=2
      */
     @GetMapping("/{userId}")
     public VMChannel getChannel(
             @PathVariable String userId,
-            @RequestParam(defaultValue = "0") int maxVideos)
+            @RequestParam(defaultValue = "0") int maxVideos,
+            @RequestParam(defaultValue = "0") int maxPages)
             throws ChannelNotFoundException, VideoNotFoundException, CaptionNotFoundException {
 
         int limit = maxVideos > 0 ? maxVideos : defaultMaxVideos;
-        return fetchAndTransform(userId, limit);
+        int pages = maxPages > 0 ? maxPages : defaultMaxPages;
+        return fetchAndTransform(userId, limit, pages);
     }
 
     // ─── POST: operación ETL completa con envío a VideoMiner ─────────────────────
@@ -97,22 +104,25 @@ public class ChannelController {
      * Extrae datos de Dailymotion, los transforma y los envía a VideoMiner.
      * Devuelve 201 CREATED con el objeto VMChannel enviado.
      *
-     * Ejemplo: POST http://localhost:8081/dailymotion/Euronews?maxVideos=5
+     * Ejemplo: POST http://localhost:8081/dailymotion/Euronews?maxVideos=5&maxPages=2
      *
      * @param userId    ID o screenname del canal de Dailymotion
-     * @param maxVideos número máximo de vídeos (opcional, usa el default si es 0)
+     * @param maxVideos número máximo de vídeos por página (opcional, usa el default si es 0)
+     * @param maxPages  número máximo de páginas a recorrer (opcional, usa el default si es 0)
      */
     @PostMapping("/{userId}")
     @ResponseStatus(HttpStatus.CREATED)
     public VMChannel createChannel(
             @PathVariable String userId,
-            @RequestParam(defaultValue = "0") int maxVideos)
+            @RequestParam(defaultValue = "0") int maxVideos,
+            @RequestParam(defaultValue = "0") int maxPages)
             throws ChannelNotFoundException, VideoNotFoundException, CaptionNotFoundException {
 
         int limit = maxVideos > 0 ? maxVideos : defaultMaxVideos;
+        int pages = maxPages > 0 ? maxPages : defaultMaxPages;
 
         // 1-4. Extract + Transform
-        VMChannel vmChannel = fetchAndTransform(userId, limit);
+        VMChannel vmChannel = fetchAndTransform(userId, limit, pages);
 
         // 5. Load: POST al endpoint de VideoMiner
         return restTemplate.postForObject(videoMinerUri, vmChannel, VMChannel.class);
@@ -124,10 +134,11 @@ public class ChannelController {
      * Centraliza el proceso de Extract y Transform, reutilizado por GET y POST.
      *
      * @param userId    identificador del canal en Dailymotion
-     * @param maxVideos número máximo de vídeos a extraer
+     * @param maxVideos número máximo de vídeos a extraer por página
+     * @param maxPages  número máximo de páginas a recorrer
      * @return VMChannel transformado
      */
-    private VMChannel fetchAndTransform(String userId, int maxVideos)
+    private VMChannel fetchAndTransform(String userId, int maxVideos, int maxPages)
             throws ChannelNotFoundException, VideoNotFoundException, CaptionNotFoundException {
 
         // ── EXTRACT ──────────────────────────────────────────────────────────────
@@ -136,7 +147,7 @@ public class ChannelController {
         DMOwner dmChannel = channelService.getChannel(userId);
 
         // 2. Obtener los vídeos del canal
-        DMVideoSearch videoSearch = videoService.getVideos(userId, maxVideos);
+        DMVideoSearch videoSearch = videoService.getVideos(userId, maxVideos, maxPages);
         List<DMVideo> dmVideos = videoSearch.getList();
 
         // ── TRANSFORM ────────────────────────────────────────────────────────────
