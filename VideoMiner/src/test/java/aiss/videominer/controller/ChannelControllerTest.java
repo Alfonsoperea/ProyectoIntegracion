@@ -2,123 +2,111 @@ package aiss.videominer.controller;
 
 import aiss.videominer.model.Channel;
 import aiss.videominer.repository.ChannelRepository;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@WebMvcTest(ChannelController.class)
+@SpringBootTest
+@AutoConfigureMockMvc
+@Transactional // Revierte los cambios en la BD tras cada test
 class ChannelControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
 
-    @MockitoBean
+    @Autowired
     private ChannelRepository channelRepository;
 
+    @Autowired
+    private ObjectMapper objectMapper;
+
     @Test
-    void createChannel_returnsCreated() throws Exception {
-        Channel saved = new Channel();
-        saved.setId("channel-1");
-        saved.setName("AISS");
-        saved.setCreatedTime("2026-01-01");
-        saved.setVideos(List.of());
-
-        when(channelRepository.save(any(Channel.class))).thenReturn(saved);
-
-        String body = """
-                {
-                  "id": "channel-1",
-                  "name": "AISS",
-                  "description": "desc",
-                  "createdTime": "2026-01-01",
-                  "videos": []
-                }
-                """;
+    @DisplayName("POST /videominer/channels - Debe crear un canal en la BD real")
+    void createChannel_Real() throws Exception {
+        Channel channel = new Channel();
+        channel.setId("channel-1");
+        channel.setName("AISS");
+        channel.setCreatedTime("2026-01-01");
+        channel.setVideos(List.of());
 
         mockMvc.perform(post("/videominer/channels")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(body))
+                        .content(objectMapper.writeValueAsString(channel)))
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.id").value("channel-1"));
     }
 
     @Test
-    void findAll_returnsOk() throws Exception {
+    @DisplayName("GET /videominer/channels - Debe retornar lista con canales reales")
+    void findAll_Real() throws Exception {
+        // Insertamos manualmente en la BD real de prueba
         Channel channel = new Channel();
-        channel.setId("channel-1");
-        channel.setName("AISS");
-        channel.setCreatedTime("2026-01-01");
-        channel.setVideos(List.of());
-
-        when(channelRepository.findAll()).thenReturn(List.of(channel));
+        channel.setId("channel-test");
+        channel.setName("Test Channel");
+        channel.setCreatedTime("2026-05-09");
+        channelRepository.save(channel);
 
         mockMvc.perform(get("/videominer/channels"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$[0].id").value("channel-1"));
+                .andExpect(jsonPath("$[?(@.id == 'channel-test')]").exists());
     }
 
     @Test
-    void findOne_returnsOk() throws Exception {
+    @DisplayName("GET /videominer/channels/{id} - Debe encontrar un canal persistido")
+    void findOne_Real() throws Exception {
         Channel channel = new Channel();
-        channel.setId("channel-1");
-        channel.setName("AISS");
-        channel.setCreatedTime("2026-01-01");
-        channel.setVideos(List.of());
+        channel.setId("find-me");
+        channel.setName("Find Me");
+        channel.setCreatedTime("2026-05-09");
+        channelRepository.save(channel);
 
-        when(channelRepository.findById("channel-1")).thenReturn(Optional.of(channel));
-
-        mockMvc.perform(get("/videominer/channels/channel-1"))
+        mockMvc.perform(get("/videominer/channels/find-me"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.id").value("channel-1"));
+                .andExpect(jsonPath("$.id").value("find-me"));
     }
 
     @Test
-    void updateChannel_returnsOk() throws Exception {
-        Channel updated = new Channel();
-        updated.setId("channel-1");
-        updated.setName("Updated");
-        updated.setCreatedTime("2026-01-01");
-        updated.setVideos(List.of());
+    @DisplayName("PUT /videominer/channels/{id} - Debe actualizar datos reales")
+    void updateChannel_Real() throws Exception {
+        Channel channel = new Channel();
+        channel.setId("update-me");
+        channel.setName("Old Name");
+        channel.setCreatedTime("2026-05-09");
+        channelRepository.save(channel);
 
-        when(channelRepository.existsById("channel-1")).thenReturn(true);
-        when(channelRepository.save(any(Channel.class))).thenReturn(updated);
+        channel.setName("New Name");
 
-        String body = """
-                {
-                  "name": "Updated",
-                  "description": "desc",
-                  "createdTime": "2026-01-01",
-                  "videos": []
-                }
-                """;
-
-        mockMvc.perform(put("/videominer/channels/channel-1")
+        mockMvc.perform(put("/videominer/channels/update-me")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(body))
+                        .content(objectMapper.writeValueAsString(channel)))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.name").value("Updated"));
+                .andExpect(jsonPath("$.name").value("New Name"));
     }
 
     @Test
-    void deleteChannel_returnsNoContent() throws Exception {
-        when(channelRepository.existsById("channel-1")).thenReturn(true);
+    @DisplayName("DELETE /videominer/channels/{id} - Debe eliminar de la BD real")
+    void deleteChannel_Real() throws Exception {
+        Channel channel = new Channel();
+        channel.setId("delete-me");
+        channel.setName("Delete Me");
+        channel.setCreatedTime("2026-05-09");
+        channelRepository.save(channel);
 
-        mockMvc.perform(delete("/videominer/channels/channel-1"))
+        mockMvc.perform(delete("/videominer/channels/delete-me"))
                 .andExpect(status().isNoContent());
+
+        // Verificamos que ya no existe
+        assert(channelRepository.findById("delete-me").isEmpty());
     }
 }

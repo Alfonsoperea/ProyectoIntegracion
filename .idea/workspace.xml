@@ -4,7 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f4798b2f-fc27-45dd-9b25-76aff33dd403" name="Changes" comment="junit controller" />
+    <list default="true" id="f4798b2f-fc27-45dd-9b25-76aff33dd403" name="Changes" comment="junit tranformer test">
+      <change afterPath="$PROJECT_DIR$/DailyMotionMiner/src/test/java/com/aiss/DailyMotionMiner/service/ChannelServiceTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/DailyMotionMiner/src/test/java/com/aiss/DailyMotionMiner/service/SubtitleServiceTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/DailyMotionMiner/src/test/java/com/aiss/DailyMotionMiner/service/VideoServiceTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PeerTubeMiner/src/test/java/com/aiss/PeerTubeMiner/service/CaptionServiceTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PeerTubeMiner/src/test/java/com/aiss/PeerTubeMiner/service/ChannelServiceTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PeerTubeMiner/src/test/java/com/aiss/PeerTubeMiner/service/CommentServiceTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PeerTubeMiner/src/test/java/com/aiss/PeerTubeMiner/service/VideoServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DailyMotionMiner/src/test/java/com/aiss/DailyMotionMiner/controller/ChannelControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/DailyMotionMiner/src/test/java/com/aiss/DailyMotionMiner/controller/ChannelControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PeerTubeMiner/src/test/java/com/aiss/PeerTubeMiner/controller/ChannelControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/PeerTubeMiner/src/test/java/com/aiss/PeerTubeMiner/controller/ChannelControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/VideoMiner/src/test/java/aiss/videominer/controller/CaptionControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/VideoMiner/src/test/java/aiss/videominer/controller/CaptionControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/VideoMiner/src/test/java/aiss/videominer/controller/ChannelControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/VideoMiner/src/test/java/aiss/videominer/controller/ChannelControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/VideoMiner/src/test/java/aiss/videominer/controller/CommentControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/VideoMiner/src/test/java/aiss/videominer/controller/CommentControllerTest.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -30,6 +44,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="package-info" />
         <option value="Class" />
       </list>
     </option>
@@ -78,11 +93,16 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "JUnit.CaptionControllerTest.executor": "Run",
+    "JUnit.CaptionServiceTest.executor": "Run",
     "JUnit.ChannelControllerTest.executor": "Run",
+    "JUnit.ChannelServiceTest.executor": "Run",
     "JUnit.CommentControllerTest.executor": "Run",
+    "JUnit.CommentServiceTest.executor": "Run",
     "JUnit.DailyMotionTransformerTest.executor": "Run",
+    "JUnit.SubtitleServiceTest.executor": "Run",
     "JUnit.Transformer2Test.executor": "Run",
     "JUnit.VideoControllerTest.executor": "Run",
+    "JUnit.VideoServiceTest.executor": "Run",
     "Maven.DailyMotionMiner [clean,install...].executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.MCP Project settings loaded": "true",
@@ -259,7 +279,15 @@
       <option name="project" value="LOCAL" />
       <updated>1778340101431</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="junit tranformer test">
+      <option name="closed" value="true" />
+      <created>1778340349443</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1778340349443</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -284,7 +312,8 @@
     <MESSAGE value="Implementacion completa de DailyMotionMiner. A groso modo, inspeccion requerida :)" />
     <MESSAGE value="junit" />
     <MESSAGE value="junit controller" />
-    <option name="LAST_COMMIT_MESSAGE" value="junit controller" />
+    <MESSAGE value="junit tranformer test" />
+    <option name="LAST_COMMIT_MESSAGE" value="junit tranformer test" />
   </component>
   <component name="github-copilot-workspace">
     <instructionFileLocations>

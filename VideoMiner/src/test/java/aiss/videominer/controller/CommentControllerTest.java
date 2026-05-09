@@ -4,107 +4,114 @@ import aiss.videominer.model.Comment;
 import aiss.videominer.model.Video;
 import aiss.videominer.repository.CommentRepository;
 import aiss.videominer.repository.VideoRepository;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@WebMvcTest(CommentController.class)
+@SpringBootTest
+@AutoConfigureMockMvc
+@Transactional // Limpia la base de datos tras cada test
 class CommentControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
 
-    @MockitoBean
+    @Autowired
     private CommentRepository commentRepository;
 
-    @MockitoBean
+    @Autowired
     private VideoRepository videoRepository;
 
-    @Test
-    void getAllComments_returnsOk() throws Exception {
-        Comment comment = new Comment();
-        comment.setId("comment-1");
-        comment.setText("hola");
+    @Autowired
+    private ObjectMapper objectMapper;
 
-        when(commentRepository.findAll()).thenReturn(List.of(comment));
+    @Test
+    @DisplayName("GET /videominer/comments - Debe retornar lista de comentarios reales")
+    void getAllComments_Real() throws Exception {
+        // Insertamos un comentario de prueba
+        Comment comment = new Comment();
+        comment.setId("c-1");
+        comment.setText("Comentario de prueba");
+        commentRepository.save(comment);
 
         mockMvc.perform(get("/videominer/comments"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$[0].id").value("comment-1"));
+                .andExpect(jsonPath("$[?(@.id == 'c-1')]").exists());
     }
 
     @Test
-    void findOne_returnsOk() throws Exception {
+    @DisplayName("GET /videominer/comments/{id} - Debe encontrar un comentario persistido")
+    void findOne_Real() throws Exception {
         Comment comment = new Comment();
-        comment.setId("comment-1");
-        comment.setText("hola");
+        comment.setId("c-find");
+        comment.setText("Búscame");
+        commentRepository.save(comment);
 
-        when(commentRepository.findById("comment-1")).thenReturn(Optional.of(comment));
-
-        mockMvc.perform(get("/videominer/comments/comment-1"))
+        mockMvc.perform(get("/videominer/comments/c-find"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.id").value("comment-1"));
+                .andExpect(jsonPath("$.text").value("Búscame"));
     }
 
     @Test
-    void updateComment_returnsOk() throws Exception {
+    @DisplayName("PUT /videominer/comments/{id} - Debe actualizar un comentario en la BD")
+    void updateComment_Real() throws Exception {
         Comment comment = new Comment();
-        comment.setId("comment-1");
-        comment.setText("nuevo");
+        comment.setId("c-update");
+        comment.setText("Texto antiguo");
+        commentRepository.save(comment);
 
-        when(commentRepository.existsById("comment-1")).thenReturn(true);
-        when(commentRepository.save(any(Comment.class))).thenReturn(comment);
+        comment.setText("Texto nuevo");
 
-        String body = """
-                {
-                  "text": "nuevo",
-                  "createdOn": "2026-01-01"
-                }
-                """;
-
-        mockMvc.perform(put("/videominer/comments/comment-1")
+        mockMvc.perform(put("/videominer/comments/c-update")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(body))
+                        .content(objectMapper.writeValueAsString(comment)))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.text").value("nuevo"));
+                .andExpect(jsonPath("$.text").value("Texto nuevo"));
     }
 
     @Test
-    void deleteComment_returnsNoContent() throws Exception {
-        when(commentRepository.existsById("comment-1")).thenReturn(true);
-
-        mockMvc.perform(delete("/videominer/comments/comment-1"))
-                .andExpect(status().isNoContent());
-    }
-
-    @Test
-    void getCommentsByVideoId_returnsOk() throws Exception {
+    @DisplayName("DELETE /videominer/comments/{id} - Debe borrar el comentario")
+    void deleteComment_Real() throws Exception {
         Comment comment = new Comment();
-        comment.setId("comment-1");
-        comment.setText("hola");
+        comment.setId("c-delete");
+        commentRepository.save(comment);
 
+        mockMvc.perform(delete("/videominer/comments/c-delete"))
+                .andExpect(status().isNoContent());
+
+        // Verificamos que ya no está en el repositorio
+        assert(commentRepository.findById("c-delete").isEmpty());
+    }
+
+    @Test
+    @DisplayName("GET /videominer/videos/{id}/comments - Debe traer los comentarios de un video")
+    void getCommentsByVideoId_Real() throws Exception {
+        // Creamos comentario
+        Comment comment = new Comment();
+        comment.setId("c-video");
+        comment.setText("Hola video");
+        commentRepository.save(comment);
+
+        // Creamos video y asociamos comentario
         Video video = new Video();
-        video.setId("video-1");
+        video.setId("v-1");
+        video.setName("Video con comentarios");
         video.setComments(List.of(comment));
+        videoRepository.save(video);
 
-        when(videoRepository.findById("video-1")).thenReturn(Optional.of(video));
-
-        mockMvc.perform(get("/videominer/videos/video-1/comments"))
+        mockMvc.perform(get("/videominer/videos/v-1/comments"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$[0].id").value("comment-1"));
+                .andExpect(jsonPath("$[0].id").value("c-video"));
     }
 }

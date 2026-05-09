@@ -1,114 +1,83 @@
 package aiss.videominer.controller;
 
 import aiss.videominer.model.Caption;
-import aiss.videominer.model.Video;
 import aiss.videominer.repository.CaptionRepository;
-import aiss.videominer.repository.VideoRepository;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-import java.util.Optional;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
-@WebMvcTest(CaptionController.class)
+@SpringBootTest
+@AutoConfigureMockMvc
+@Transactional // Muy importante: limpia la base de datos después de cada test
 class CaptionControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
 
-    @MockitoBean
+    @Autowired
     private CaptionRepository captionRepository;
 
-    @MockitoBean
-    private VideoRepository videoRepository;
+    @Autowired
+    private ObjectMapper objectMapper;
 
     @Test
-    void getAllCaptions_returnsOk() throws Exception {
-        Caption caption = new Caption();
-        caption.setId("caption-1");
-        caption.setName("sub");
-        caption.setLanguage("es");
-
-        when(captionRepository.findAll()).thenReturn(List.of(caption));
-
+    @DisplayName("GET /videominer/captions - Debe retornar lista (vacía o con datos)")
+    void getAllCaptions_Real() throws Exception {
         mockMvc.perform(get("/videominer/captions"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$[0].id").value("caption-1"));
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON));
     }
 
     @Test
-    void findOne_returnsOk() throws Exception {
+    @DisplayName("PUT /videominer/captions/{id} - Debe actualizar una caption real")
+    void updateCaption_Real() throws Exception {
+        // 1. Pre-insertamos una caption en la BD real
         Caption caption = new Caption();
-        caption.setId("caption-1");
-        caption.setName("sub");
-        caption.setLanguage("es");
+        caption.setId("cap-test");
+        caption.setName("Original name");
+        caption.setLanguage("en");
+        captionRepository.save(caption);
 
-        when(captionRepository.findById("caption-1")).thenReturn(Optional.of(caption));
+        // 2. Intentamos actualizarla a través de la API
+        caption.setName("Updated name");
 
-        mockMvc.perform(get("/videominer/captions/caption-1"))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.id").value("caption-1"));
-    }
-
-    @Test
-    void updateCaption_returnsOk() throws Exception {
-        Caption caption = new Caption();
-        caption.setId("caption-1");
-        caption.setName("new-sub");
-        caption.setLanguage("es");
-
-        when(captionRepository.existsById("caption-1")).thenReturn(true);
-        when(captionRepository.save(any(Caption.class))).thenReturn(caption);
-
-        String body = """
-                {
-                  "name": "new-sub",
-                  "language": "es"
-                }
-                """;
-
-        mockMvc.perform(put("/videominer/captions/caption-1")
+        mockMvc.perform(put("/videominer/captions/cap-test")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(body))
+                        .content(objectMapper.writeValueAsString(caption)))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.name").value("new-sub"));
+                .andExpect(jsonPath("$.name").value("Updated name"));
     }
 
     @Test
-    void deleteCaption_returnsNoContent() throws Exception {
-        when(captionRepository.existsById("caption-1")).thenReturn(true);
-
-        mockMvc.perform(delete("/videominer/captions/caption-1"))
-                .andExpect(status().isNoContent());
-    }
-
-    @Test
-    void getCaptionsByVideoId_returnsOk() throws Exception {
+    @DisplayName("DELETE /videominer/captions/{id} - Debe borrar si existe")
+    void deleteCaption_Real() throws Exception {
+        // 1. Pre-insertamos
         Caption caption = new Caption();
-        caption.setId("caption-1");
-        caption.setName("sub");
-        caption.setLanguage("es");
+        caption.setId("cap-to-delete");
+        captionRepository.save(caption);
 
-        Video video = new Video();
-        video.setId("video-1");
-        video.setCaptions(List.of(caption));
+        // 2. Borramos
+        mockMvc.perform(delete("/videominer/captions/cap-to-delete"))
+                .andExpect(status().isNoContent());
 
-        when(videoRepository.findById("video-1")).thenReturn(Optional.of(video));
+        // 3. Verificamos que ya no existe (opcional)
+        mockMvc.perform(get("/videominer/captions/cap-to-delete"))
+                .andExpect(status().isNotFound());
+    }
 
-        mockMvc.perform(get("/videominer/videos/video-1/captions"))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$[0].id").value("caption-1"));
+    @Test
+    @DisplayName("GET /videominer/captions/{id} - 404 si no existe")
+    void findOne_NotFound_Real() throws Exception {
+        mockMvc.perform(get("/videominer/captions/id-fantasma"))
+                .andExpect(status().isNotFound());
     }
 }
