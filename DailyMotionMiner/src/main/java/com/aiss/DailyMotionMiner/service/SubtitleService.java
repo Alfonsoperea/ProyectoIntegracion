@@ -41,7 +41,7 @@ public class SubtitleService {
      */
     public DMSubtleSearch getSubtitles(String videoId) throws CaptionNotFoundException {
         String url = baseUri + "/video/" + videoId + "/subtitles"
-                + "?fields=id,language,url";
+                + "?fields=id,language,language_label,url";
         try {
             DMSubtleSearch result = restTemplate.getForObject(url, DMSubtleSearch.class);
             if (result == null) {

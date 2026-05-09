@@ -148,7 +148,7 @@ public class DailyMotionTransformer {
      * Mapeo de campos:
      *   DMSubtitle.id            → VMCaption.id
      *   DMSubtitle.url           → VMCaption.name    (URL del archivo de subtítulos)
-     *   DMSubtitle.languageLabel → VMCaption.language (nombre completo del idioma)
+     *   DMSubtitle.language      → VMCaption.language (código del idioma)
      *
      * @param subtitle subtítulo de Dailymotion
      * @return VMCaption listo para incluir en el vídeo

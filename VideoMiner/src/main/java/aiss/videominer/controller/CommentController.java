@@ -7,6 +7,7 @@ import aiss.videominer.model.Video;
 import aiss.videominer.repository.CommentRepository;
 import aiss.videominer.repository.VideoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
@@ -33,6 +34,28 @@ public class CommentController {
             throw new CommentNotFoundException();
         }
         return comment.get();
+    }
+
+    @PutMapping("/comments/{id}")
+    public Comment updateComment(@PathVariable String id,
+                                 @RequestBody Comment updatedComment)
+            throws CommentNotFoundException {
+        if (!commentRepository.existsById(id)) {
+            throw new CommentNotFoundException();
+        }
+
+        updatedComment.setId(id);
+        return commentRepository.save(updatedComment);
+    }
+
+    @DeleteMapping("/comments/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteComment(@PathVariable String id) throws CommentNotFoundException {
+        if (!commentRepository.existsById(id)) {
+            throw new CommentNotFoundException();
+        }
+
+        commentRepository.deleteById(id);
     }
 
     @GetMapping("/videos/{videoId}/comments")

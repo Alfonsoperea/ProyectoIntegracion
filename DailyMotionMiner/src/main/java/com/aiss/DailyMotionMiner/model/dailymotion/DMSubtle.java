@@ -10,6 +10,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 @JsonPropertyOrder({
         "id",
         "language",
+        "language_label",
         "url"
 })
 @Generated("jsonschema2pojo")
@@ -19,6 +20,8 @@ public class DMSubtle {
     private String id;
     @JsonProperty("language")
     private String language;
+    @JsonProperty("language_label")
+    private String languageLabel;
     @JsonProperty("url")
     private String url;
 
@@ -42,6 +45,16 @@ public class DMSubtle {
         this.language = language;
     }
 
+    @JsonProperty("language_label")
+    public String getLanguageLabel() {
+        return languageLabel;
+    }
+
+    @JsonProperty("language_label")
+    public void setLanguageLabel(String languageLabel) {
+        this.languageLabel = languageLabel;
+    }
+
     @JsonProperty("url")
     public String getUrl() {
         return url;
@@ -63,6 +76,10 @@ public class DMSubtle {
         sb.append("language");
         sb.append('=');
         sb.append(((this.language == null)?"<null>":this.language));
+        sb.append(',');
+        sb.append("languageLabel");
+        sb.append('=');
+        sb.append(((this.languageLabel == null)?"<null>":this.languageLabel));
         sb.append(',');
         sb.append("url");
         sb.append('=');

@@ -5,13 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f4798b2f-fc27-45dd-9b25-76aff33dd403" name="Changes" comment="Implementacion completa de DailyMotionMiner. A groso modo, inspeccion requerida :)">
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PeerTubeMiner/src/main/java/com/aiss/PeerTubeMiner/controller/ChannelController.java" beforeDir="false" afterPath="$PROJECT_DIR$/PeerTubeMiner/src/main/java/com/aiss/PeerTubeMiner/controller/ChannelController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PeerTubeMiner/src/main/java/com/aiss/PeerTubeMiner/etl/transformer2.java" beforeDir="false" afterPath="$PROJECT_DIR$/PeerTubeMiner/src/main/java/com/aiss/PeerTubeMiner/etl/transformer2.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PeerTubeMiner/src/main/java/com/aiss/PeerTubeMiner/model/peertube/Caption.java" beforeDir="false" afterPath="$PROJECT_DIR$/PeerTubeMiner/src/main/java/com/aiss/PeerTubeMiner/model/peertube/Caption.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PeerTubeMiner/src/main/java/com/aiss/PeerTubeMiner/model/peertube/Channel.java" beforeDir="false" afterPath="$PROJECT_DIR$/PeerTubeMiner/src/main/java/com/aiss/PeerTubeMiner/model/peertube/Channel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PeerTubeMiner/src/main/java/com/aiss/PeerTubeMiner/model/peertube/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/PeerTubeMiner/src/main/java/com/aiss/PeerTubeMiner/model/peertube/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PeerTubeMiner/src/main/java/com/aiss/PeerTubeMiner/model/peertube/Video.java" beforeDir="false" afterPath="$PROJECT_DIR$/PeerTubeMiner/src/main/java/com/aiss/PeerTubeMiner/model/peertube/Video.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DailyMotionMiner/src/main/java/com/aiss/DailyMotionMiner/etl/DailyMotionTransformer.java" beforeDir="false" afterPath="$PROJECT_DIR$/DailyMotionMiner/src/main/java/com/aiss/DailyMotionMiner/etl/DailyMotionTransformer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DailyMotionMiner/src/main/java/com/aiss/DailyMotionMiner/model/dailymotion/DMSubtle.java" beforeDir="false" afterPath="$PROJECT_DIR$/DailyMotionMiner/src/main/java/com/aiss/DailyMotionMiner/model/dailymotion/DMSubtle.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DailyMotionMiner/src/main/java/com/aiss/DailyMotionMiner/service/SubtitleService.java" beforeDir="false" afterPath="$PROJECT_DIR$/DailyMotionMiner/src/main/java/com/aiss/DailyMotionMiner/service/SubtitleService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/VideoMiner/src/main/java/aiss/videominer/controller/CaptionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/VideoMiner/src/main/java/aiss/videominer/controller/CaptionController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/VideoMiner/src/main/java/aiss/videominer/controller/ChannelController.java" beforeDir="false" afterPath="$PROJECT_DIR$/VideoMiner/src/main/java/aiss/videominer/controller/ChannelController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/VideoMiner/src/main/java/aiss/videominer/controller/CommentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/VideoMiner/src/main/java/aiss/videominer/controller/CommentController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/VideoMiner/src/main/java/aiss/videominer/controller/VideoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/VideoMiner/src/main/java/aiss/videominer/controller/VideoController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/VideoMiner/src/main/java/aiss/videominer/model/Caption.java" beforeDir="false" afterPath="$PROJECT_DIR$/VideoMiner/src/main/java/aiss/videominer/model/Caption.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/VideoMiner/src/main/java/aiss/videominer/model/Video.java" beforeDir="false" afterPath="$PROJECT_DIR$/VideoMiner/src/main/java/aiss/videominer/model/Video.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -138,7 +143,7 @@
       </map>
     </option>
   </component>
-  <component name="RunManager" selected="Spring Boot.DailyMotionMinerApplication">
+  <component name="RunManager" selected="Spring Boot.VideominerApplication">
     <configuration name="DailyMotionMinerApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="DailyMotionMiner" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.aiss.DailyMotionMiner.DailyMotionMinerApplication" />
