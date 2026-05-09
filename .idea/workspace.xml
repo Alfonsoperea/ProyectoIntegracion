@@ -5,18 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f4798b2f-fc27-45dd-9b25-76aff33dd403" name="Changes" comment="Implementacion completa de DailyMotionMiner. A groso modo, inspeccion requerida :)">
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DailyMotionMiner/src/main/java/com/aiss/DailyMotionMiner/etl/DailyMotionTransformer.java" beforeDir="false" afterPath="$PROJECT_DIR$/DailyMotionMiner/src/main/java/com/aiss/DailyMotionMiner/etl/DailyMotionTransformer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DailyMotionMiner/src/main/java/com/aiss/DailyMotionMiner/model/dailymotion/DMSubtle.java" beforeDir="false" afterPath="$PROJECT_DIR$/DailyMotionMiner/src/main/java/com/aiss/DailyMotionMiner/model/dailymotion/DMSubtle.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DailyMotionMiner/src/main/java/com/aiss/DailyMotionMiner/service/SubtitleService.java" beforeDir="false" afterPath="$PROJECT_DIR$/DailyMotionMiner/src/main/java/com/aiss/DailyMotionMiner/service/SubtitleService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/VideoMiner/src/main/java/aiss/videominer/controller/CaptionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/VideoMiner/src/main/java/aiss/videominer/controller/CaptionController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/VideoMiner/src/main/java/aiss/videominer/controller/ChannelController.java" beforeDir="false" afterPath="$PROJECT_DIR$/VideoMiner/src/main/java/aiss/videominer/controller/ChannelController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/VideoMiner/src/main/java/aiss/videominer/controller/CommentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/VideoMiner/src/main/java/aiss/videominer/controller/CommentController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/VideoMiner/src/main/java/aiss/videominer/controller/VideoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/VideoMiner/src/main/java/aiss/videominer/controller/VideoController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/VideoMiner/src/main/java/aiss/videominer/model/Caption.java" beforeDir="false" afterPath="$PROJECT_DIR$/VideoMiner/src/main/java/aiss/videominer/model/Caption.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/VideoMiner/src/main/java/aiss/videominer/model/Video.java" beforeDir="false" afterPath="$PROJECT_DIR$/VideoMiner/src/main/java/aiss/videominer/model/Video.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DailyMotionMiner/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/DailyMotionMiner/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DailyMotionMiner/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/DailyMotionMiner/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PeerTubeMiner/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/PeerTubeMiner/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PeerTubeMiner/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/PeerTubeMiner/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/VideoMiner/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/VideoMiner/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/VideoMiner/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/VideoMiner/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,6 +57,13 @@
     &quot;accountId&quot;: &quot;c56c1daf-4b0f-41e0-bc16-578c399f745d&quot;
   }
 }</component>
+  <component name="MavenImportPreferences">
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="jdkForImporter" value="#JAVA_HOME" />
+      </MavenImportingSettings>
+    </option>
+  </component>
   <component name="McpProjectServerCommands">
     <commands />
     <urls />
@@ -80,6 +82,7 @@
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
+    &quot;Maven.DailyMotionMiner [clean,install...].executor&quot;: &quot;Run&quot;,
     &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
@@ -99,6 +102,7 @@
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;run.configurations.included.in.services&quot;: &quot;true&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.importing&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
@@ -119,6 +123,11 @@
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.aiss.PeerTubeMiner.exception" />
     </key>
+  </component>
+  <component name="RunAnythingCache">
+    <option name="myCommands">
+      <command value="mvn clean install -Dmaven.wagon.http.ssl.insecure=true -" />
+    </option>
   </component>
   <component name="RunDashboard">
     <option name="configurationTypes">
