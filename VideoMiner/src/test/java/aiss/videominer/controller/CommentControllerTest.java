@@ -21,7 +21,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-@Transactional // Limpia la base de datos tras cada test
+@Transactional 
 class CommentControllerTest {
 
     @Autowired
@@ -39,7 +39,7 @@ class CommentControllerTest {
     @Test
     @DisplayName("GET /videominer/comments - Debe retornar lista de comentarios reales")
     void getAllComments_Real() throws Exception {
-        // Insertamos un comentario de prueba
+        
         Comment comment = new Comment();
         comment.setId("c-1");
         comment.setText("Comentario de prueba");
@@ -90,20 +90,20 @@ class CommentControllerTest {
         mockMvc.perform(delete("/videominer/comments/c-delete"))
                 .andExpect(status().isNoContent());
 
-        // Verificamos que ya no está en el repositorio
+        
         assert(commentRepository.findById("c-delete").isEmpty());
     }
 
     @Test
     @DisplayName("GET /videominer/videos/{id}/comments - Debe traer los comentarios de un video")
     void getCommentsByVideoId_Real() throws Exception {
-        // Creamos comentario
+        
         Comment comment = new Comment();
         comment.setId("c-video");
         comment.setText("Hola video");
         commentRepository.save(comment);
 
-        // Creamos video y asociamos comentario
+        
         Video video = new Video();
         video.setId("v-1");
         video.setName("Video con comentarios");

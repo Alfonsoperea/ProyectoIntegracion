@@ -30,11 +30,11 @@ public class CaptionController {
     @GetMapping("/captions/{id}")
     public Caption findOne(@PathVariable String id) throws CaptionNotFoundException {
         Optional<Caption> caption = captionRepository.findById(id);
-        // Si la caption no está presente en la base de datos, lanzamos el error 404
+        
         if (!caption.isPresent()) {
             throw new CaptionNotFoundException();
         }
-        // Si llegamos aquí, es que sí existe, así que la devolvemos
+        
         return caption.get();
     }
 
@@ -61,18 +61,18 @@ public class CaptionController {
     }
 
     @GetMapping("/videos/{videoId}/captions")
-    public List<Caption> getCaptionsByVideoId(@PathVariable String videoId) throws VideoNotFoundException { // Cambiar Exception por VideoNotFoundException
+    public List<Caption> getCaptionsByVideoId(@PathVariable String videoId) throws VideoNotFoundException { 
 
-        // 1. Buscamos el vídeo usando el VideoRepository
+        
         Optional<Video> video = videoRepository.findById(videoId);
 
-        // 2. Si no existe, devolvemos 404
+        
         if (!video.isPresent()) {
-            throw new VideoNotFoundException(); // Reemplazar por tu excepción
+            throw new VideoNotFoundException(); 
         }
 
-        // 3. Si existe, devolvemos su lista de captions.
-        // (Esto funciona gracias a la relación @OneToMany que configuraste en la clase Video)
+        
+        
         return video.get().getCaptions();
     }
 }

@@ -8,18 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
-/**
- * Servicio para recuperar los metadatos de un canal (usuario) de Dailymotion.
- *
- * La API de Dailymotion modela los "canales" como usuarios (users).
- * Cada usuario de Dailymotion tiene un identificador único (userId o screenname).
- *
- * Endpoint utilizado:
- *   GET https://api.dailymotion.com/user/{userId}
- *       ?fields=id,screenname,description,created_time,url,avatar_120_url
- *
- * No requiere autenticación para datos públicos.
- */
+
 @Service
 public class ChannelService {
 
@@ -29,13 +18,7 @@ public class ChannelService {
     @Value("${dailymotionminer.baseuri}")
     private String baseUri;
 
-    /**
-     * Recupera los metadatos de un canal/usuario de Dailymotion por su ID o screenname.
-     *
-     * @param userId identificador o screenname del usuario en Dailymotion
-     * @return objeto DMChannel con los datos del canal
-     * @throws ChannelNotFoundException si el usuario no existe (404 de la API)
-     */
+    
     public DMOwner getChannel(String userId) throws ChannelNotFoundException {
         String url = baseUri + "/user/" + userId
                 + "?fields=id,screenname,description,created_time,url,avatar_120_url";

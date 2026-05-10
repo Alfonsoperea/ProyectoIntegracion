@@ -19,7 +19,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-@Transactional // Revierte los cambios en la BD tras cada test
+@Transactional 
 class ChannelControllerTest {
 
     @Autowired
@@ -50,7 +50,7 @@ class ChannelControllerTest {
     @Test
     @DisplayName("GET /videominer/channels - Debe retornar lista con canales reales")
     void findAll_Real() throws Exception {
-        // Insertamos manualmente en la BD real de prueba
+        
         Channel channel = new Channel();
         channel.setId("channel-test");
         channel.setName("Test Channel");
@@ -106,7 +106,7 @@ class ChannelControllerTest {
         mockMvc.perform(delete("/videominer/channels/delete-me"))
                 .andExpect(status().isNoContent());
 
-        // Verificamos que ya no existe
+        
         assert(channelRepository.findById("delete-me").isEmpty());
     }
 }

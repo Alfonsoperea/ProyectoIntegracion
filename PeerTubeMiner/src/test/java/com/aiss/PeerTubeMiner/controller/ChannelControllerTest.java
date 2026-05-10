@@ -12,7 +12,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@SpringBootTest // Carga el contexto real de la aplicación
+@SpringBootTest 
 @AutoConfigureMockMvc
 class ChannelControllerTest {
 
@@ -22,7 +22,7 @@ class ChannelControllerTest {
     @Test
     @DisplayName("GET /peertube/{canal} - Test Real")
     void getChannel_Real() throws Exception {
-        // "framasoft" es un canal conocido de PeerTube
+        
         String canal = "framasoft";
 
         mockMvc.perform(get("/peertube/" + canal)
@@ -37,8 +37,8 @@ class ChannelControllerTest {
     void createChannel_Real() throws Exception {
         String canal = "framasoft";
 
-        // RECUERDA: VideoMiner debe estar encendido en el puerto 8080
-        // para que este test devuelva 201 (Created)
+        
+        
         mockMvc.perform(post("/peertube/" + canal)
                         .param("maxVideos", "1")
                         .param("maxComments", "0")

@@ -28,13 +28,13 @@ class ChannelServiceTest {
 
     @BeforeEach
     void setUp() {
-        // Inicialización manual idéntica a la de tu amigo
+        
         service = new ChannelService();
         ReflectionTestUtils.setField(service, "restTemplate", restTemplate);
         ReflectionTestUtils.setField(service, "apiUrl", "https://peertube.tv/api/v1");
     }
 
-    // Método helper basado en el 'createTestObject' de tu amigo
+    
     private User createMockUser(String id, String name) {
         User user = new User();
         user.setId(id);
@@ -47,32 +47,32 @@ class ChannelServiceTest {
     @Test
     @DisplayName("getUser devuelve el usuario/canal correctamente (Mock)")
     void getUser_returnsUser() throws ChannelNotFoundException {
-        // 1. Configurar la respuesta simulada
+        
         User apiResponse = createMockUser("u123", "ch-test");
 
         when(restTemplate.getForObject(anyString(), eq(User.class)))
                 .thenReturn(apiResponse);
 
-        // 2. Ejecutar la lógica del servicio
+        
         User result = service.getUser("ch-test");
 
-        // 3. Verificaciones (Assertions)
+        
         assertNotNull(result);
         assertEquals("u123", result.getId());
         assertEquals("ch-test", result.getName());
 
-        // 4. Verificar interacción
+        
         verify(restTemplate, times(1)).getForObject(anyString(), eq(User.class));
     }
 
     @Test
     @DisplayName("getUser lanza ChannelNotFoundException ante un error 404 de la API")
     void getUser_throwsExceptionOn404() {
-        // Simulamos el error 404 (Not Found)
+        
         when(restTemplate.getForObject(anyString(), eq(User.class)))
                 .thenThrow(new HttpClientErrorException(HttpStatus.NOT_FOUND));
 
-        // Verificamos que el servicio relanza la excepción correcta
+        
         assertThrows(ChannelNotFoundException.class, () -> {
             service.getUser("canal-fantasma");
         });

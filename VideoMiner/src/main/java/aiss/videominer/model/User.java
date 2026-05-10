@@ -3,9 +3,7 @@ package aiss.videominer.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 
-/**
- * @author Juan C. Alonso
- */
+
 @Entity
 @Table(name = "VMUser")
 public class User {

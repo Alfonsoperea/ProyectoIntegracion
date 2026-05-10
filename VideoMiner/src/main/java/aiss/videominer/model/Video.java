@@ -5,9 +5,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import java.util.List;
 
-/**
- * @author Juan C. Alonso
- */
+
 @Entity
 @Table(name = "Video")
 public class Video {

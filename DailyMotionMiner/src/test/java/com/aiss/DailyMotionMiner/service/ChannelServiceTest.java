@@ -28,8 +28,8 @@ class ChannelServiceTest {
 
     @BeforeEach
     void setUp() {
-        // Inicializamos el servicio y configuramos los campos privados con ReflectionTestUtils
-        // tal como hizo tu amigo en su test
+        
+        
         service = new ChannelService();
         ReflectionTestUtils.setField(service, "restTemplate", restTemplate);
         ReflectionTestUtils.setField(service, "baseUri", "https://api.dailymotion.com");
@@ -47,32 +47,32 @@ class ChannelServiceTest {
     @Test
     @DisplayName("getChannel devuelve el canal correctamente (Mock)")
     void getChannel_returnsOwner() throws ChannelNotFoundException {
-        // 1. Definimos el comportamiento del Mock (Igual que el de tu amigo)
+        
         DMOwner apiResponse = createMockOwner("x123", "euronews");
 
         when(restTemplate.getForObject(anyString(), eq(DMOwner.class)))
                 .thenReturn(apiResponse);
 
-        // 2. Ejecutamos el método del servicio
+        
         DMOwner result = service.getChannel("euronews");
 
-        // 3. Verificamos los resultados (Assertions)
+        
         assertNotNull(result);
         assertEquals("x123", result.getId());
         assertEquals("euronews", result.getScreenname());
 
-        // 4. Verificamos que se llamó al RestTemplate una vez
+        
         verify(restTemplate, times(1)).getForObject(anyString(), eq(DMOwner.class));
     }
 
     @Test
     @DisplayName("getChannel lanza ChannelNotFoundException ante un 404 de la API")
     void getChannel_throwsExceptionOn404() {
-        // 1. Simulamos el error HttpClientErrorException (404 Not Found)
+        
         when(restTemplate.getForObject(anyString(), eq(DMOwner.class)))
                 .thenThrow(new HttpClientErrorException(HttpStatus.NOT_FOUND));
 
-        // 2. Verificamos que nuestro servicio relanza la excepción correcta
+        
         assertThrows(ChannelNotFoundException.class, () -> {
             service.getChannel("usuario-inexistente");
         });

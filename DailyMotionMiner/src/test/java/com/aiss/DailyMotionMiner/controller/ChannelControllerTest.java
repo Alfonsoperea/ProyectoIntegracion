@@ -22,7 +22,7 @@ class ChannelControllerTest {
     @Test
     @DisplayName("GET /dailymotion/{id} - Real")
     void getChannel_Real() throws Exception {
-        // Usamos un ID real de DailyMotion para que el servicio no devuelva error
+        
         String channelId = "euronews";
 
         mockMvc.perform(get("/dailymotion/" + channelId)
@@ -37,8 +37,8 @@ class ChannelControllerTest {
     void createChannel_Real() throws Exception {
         String channelId = "euronews";
 
-        // IMPORTANTE: Para que este test de 201 (Created),
-        // la aplicación VideoMiner debe estar corriendo en el puerto 8080.
+        
+        
         mockMvc.perform(post("/dailymotion/" + channelId)
                         .param("maxVideos", "1")
                         .contentType(MediaType.APPLICATION_JSON))

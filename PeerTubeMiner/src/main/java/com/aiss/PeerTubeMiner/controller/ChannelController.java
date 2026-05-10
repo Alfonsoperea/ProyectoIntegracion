@@ -33,7 +33,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/peertube") // O el path base que prefieras
+@RequestMapping("/peertube") 
 public class ChannelController {
 
     @Autowired
@@ -42,9 +42,9 @@ public class ChannelController {
     private VideoService videoService;
 
     @Autowired
-    private CommentService commentService; // Servicio para traer los Comment threads [cite: 73]
+    private CommentService commentService; 
     @Autowired
-    private CaptionService captionService; // Servicio para traer las Captions [cite: 71]
+    private CaptionService captionService; 
 
     @Autowired
     private transformer2 transformer;
@@ -55,7 +55,7 @@ public class ChannelController {
     @Value("${videominer.uri}")
     private String videoMinerUri;
 
-    // 1. Operación POST: Busca, transforma y ENVÍA a VideoMiner
+    
     @PostMapping("/{accountName}")
     @ResponseStatus(HttpStatus.CREATED)
     public VMChannel createChannel(
@@ -63,30 +63,28 @@ public class ChannelController {
             @RequestParam(defaultValue = "10") Integer maxVideos,
             @RequestParam(defaultValue = "2") Integer maxComments) throws ChannelNotFoundException, VideoNotFoundException, CommentNotFoundException, CaptionNotFoundException {
 
-        // A. Obtener datos de PeerTube (Orquestación de servicios)
+        
         VMChannel commonChannel = fetchAndTransform(accountName, maxVideos, maxComments);
 
-        // B. Realizar el POST a VideoMiner con el objeto transformado
-        // El enunciado dice que se envía el canal y este ya contiene todo
+        
+        
         return restTemplate.postForObject(videoMinerUri, commonChannel, VMChannel.class);
     }
 
-    // 2. Operación GET: De solo lectura para pruebas (recomendado en el PDF) 
+    
     @GetMapping("/{accountName}")
     public VMChannel getChannelTest(
             @PathVariable String accountName,
             @RequestParam(defaultValue = "10") Integer maxVideos,
             @RequestParam(defaultValue = "2") Integer maxComments) throws ChannelNotFoundException, VideoNotFoundException, CommentNotFoundException, CaptionNotFoundException {
 
-        // Simplemente devuelve los datos transformados sin enviarlos a VideoMiner
+        
         return fetchAndTransform(accountName, maxVideos, maxComments);
     }
 
-    /**
-     * Método auxiliar para centralizar la obtención y transformación de datos.
-     */
+    
     private VMChannel fetchAndTransform(String accountName, Integer maxVideos, Integer maxComments) throws ChannelNotFoundException, VideoNotFoundException, CommentNotFoundException, CaptionNotFoundException {
-        // 1. Obtener metadatos del Canal/Usuario
+        
         User ptAccount = channelService.getUser(accountName);
         Channel ptChannel = new Channel();
         ptChannel.setId(ptAccount.getId() != null ? ptAccount.getId() : accountName);
@@ -94,11 +92,11 @@ public class ChannelController {
         ptChannel.setDescription(ptAccount.getDescription());
         ptChannel.setCreatedAt(ptAccount.getCreatedAt());
     
-        // 2. Obtener los Vídeos del canal
+        
         VideoSearch videoSearch = videoService.getVideos(accountName, maxVideos);
         List<Video> ptVideos = videoSearch.getData();
     
-        // 3. Crear VMChannel y transformar cada vídeo con comments/captions del servicio
+        
         VMChannel vmChannel = transformer.transformChannel(ptChannel, null);
         List<VMVideo> vmVideos = new ArrayList<>();
         if (ptVideos != null) {

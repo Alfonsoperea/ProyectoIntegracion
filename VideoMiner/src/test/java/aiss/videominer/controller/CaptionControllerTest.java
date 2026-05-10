@@ -17,7 +17,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-@Transactional // Muy importante: limpia la base de datos después de cada test
+@Transactional 
 class CaptionControllerTest {
 
     @Autowired
@@ -40,14 +40,14 @@ class CaptionControllerTest {
     @Test
     @DisplayName("PUT /videominer/captions/{id} - Debe actualizar una caption real")
     void updateCaption_Real() throws Exception {
-        // 1. Pre-insertamos una caption en la BD real
+        
         Caption caption = new Caption();
         caption.setId("cap-test");
         caption.setName("Original name");
         caption.setLanguage("en");
         captionRepository.save(caption);
 
-        // 2. Intentamos actualizarla a través de la API
+        
         caption.setName("Updated name");
 
         mockMvc.perform(put("/videominer/captions/cap-test")
@@ -60,16 +60,16 @@ class CaptionControllerTest {
     @Test
     @DisplayName("DELETE /videominer/captions/{id} - Debe borrar si existe")
     void deleteCaption_Real() throws Exception {
-        // 1. Pre-insertamos
+        
         Caption caption = new Caption();
         caption.setId("cap-to-delete");
         captionRepository.save(caption);
 
-        // 2. Borramos
+        
         mockMvc.perform(delete("/videominer/captions/cap-to-delete"))
                 .andExpect(status().isNoContent());
 
-        // 3. Verificamos que ya no existe (opcional)
+        
         mockMvc.perform(get("/videominer/captions/cap-to-delete"))
                 .andExpect(status().isNotFound());
     }

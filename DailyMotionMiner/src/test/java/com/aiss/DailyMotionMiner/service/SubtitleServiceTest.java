@@ -31,7 +31,7 @@ class SubtitleServiceTest {
 
     @BeforeEach
     void setUp() {
-        // Inicialización manual siguiendo el patrón de tu amigo
+        
         service = new SubtitleService();
         ReflectionTestUtils.setField(service, "restTemplate", restTemplate);
         ReflectionTestUtils.setField(service, "baseUri", "https://api.dailymotion.com");
@@ -51,32 +51,32 @@ class SubtitleServiceTest {
     @Test
     @DisplayName("getSubtitles devuelve la búsqueda de subtítulos correctamente (Mock)")
     void getSubtitles_returnsSubtleSearch() throws CaptionNotFoundException {
-        // 1. Configurar la respuesta simulada (Igual que el createTestObject de tu amigo)
+        
         DMSubtleSearch apiResponse = createMockSearch("s100");
 
         when(restTemplate.getForObject(anyString(), eq(DMSubtleSearch.class)))
                 .thenReturn(apiResponse);
 
-        // 2. Ejecutar lógica del servicio
+        
         DMSubtleSearch result = service.getSubtitles("v123");
 
-        // 3. Verificar resultados
+        
         assertNotNull(result);
         assertEquals(1, result.getList().size());
         assertEquals("s100", result.getList().get(0).getId());
 
-        // 4. Verificar interacción con el RestTemplate
+        
         verify(restTemplate, times(1)).getForObject(anyString(), eq(DMSubtleSearch.class));
     }
 
     @Test
     @DisplayName("getSubtitles lanza CaptionNotFoundException ante un error 404 de la API")
     void getSubtitles_throwsExceptionOn404() {
-        // Simulamos el error HttpClientErrorException (404 Not Found)
+        
         when(restTemplate.getForObject(anyString(), eq(DMSubtleSearch.class)))
                 .thenThrow(new HttpClientErrorException(HttpStatus.NOT_FOUND));
 
-        // Verificamos que el servicio relanza nuestra excepción personalizada
+        
         assertThrows(CaptionNotFoundException.class, () -> {
             service.getSubtitles("video-sin-subs");
         });
@@ -85,11 +85,11 @@ class SubtitleServiceTest {
     @Test
     @DisplayName("getSubtitles lanza CaptionNotFoundException si la API devuelve null")
     void getSubtitles_throwsExceptionOnNullResponse() {
-        // Configuramos el mock para que devuelva null
+        
         when(restTemplate.getForObject(anyString(), eq(DMSubtleSearch.class)))
                 .thenReturn(null);
 
-        // Verificamos la excepción
+        
         assertThrows(CaptionNotFoundException.class, () -> {
             service.getSubtitles("v123");
         });
