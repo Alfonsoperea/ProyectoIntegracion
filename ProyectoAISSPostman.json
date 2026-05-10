@@ -1,0 +1,516 @@
+{
+  "info": {
+    "_postman_id": "0c94f0b0-6554-4d3a-b363-694526924401",
+    "name": "Proyecto AISS",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "DailyMotionMiner",
+      "item": [
+        {
+          "name": "Get channel",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8081/dailymotion/xe2cka?maxVideos=5&maxPages=2",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8081",
+              "path": ["dailymotion", "xe2cka"],
+              "query": [
+                {
+                  "key": "maxVideos",
+                  "value": "5"
+                },
+                {
+                  "key": "maxPages",
+                  "value": "2"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Post channel",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8081/dailymotion/xe2cka?maxVideos=5&maxPages=2",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8081",
+              "path": ["dailymotion", "xe2cka"],
+              "query": [
+                {
+                  "key": "maxVideos",
+                  "value": "5"
+                },
+                {
+                  "key": "maxPages",
+                  "value": "2"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "PeerTubeMiner",
+      "item": [
+        {
+          "name": "Get channel",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8082/peertube/framasoft@framatube.org?maxVideos=2&maxComments=2",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8082",
+              "path": ["peertube", "framasoft@framatube.org"],
+              "query": [
+                {
+                  "key": "maxVideos",
+                  "value": "2"
+                },
+                {
+                  "key": "maxComments",
+                  "value": "2"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Post channel",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8082/peertube/framasoft@framatube.org?maxVideos=2&maxComments=2",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8082",
+              "path": ["peertube", "framasoft@framatube.org"],
+              "query": [
+                {
+                  "key": "maxVideos",
+                  "value": "2"
+                },
+                {
+                  "key": "maxComments",
+                  "value": "2"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "VideoMiner",
+      "item": [
+        {
+          "name": "channel",
+          "item": [
+            {
+              "name": "GetAll",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:8080/videominer/channels",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "8080",
+                  "path": ["videominer", "channels"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Get",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:8080/videominer/channels/:id",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "8080",
+                  "path": ["videominer", "channels", ":id"],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "xe2cka"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Put",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Nombre del canal\",\n  \"description\": \"Descripción\",\n  \"createdTime\": \"2026-05-10T12:00:00Z\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:8080/videominer/channels/:id",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "8080",
+                  "path": ["videominer", "channels", ":id"],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "xe2cka"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Delete",
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:8080/videominer/channels/:id",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "8080",
+                  "path": ["videominer", "channels", ":id"],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "xe2cka"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "video",
+          "item": [
+            {
+              "name": "GetAll",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:8080/videominer/videos",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "8080",
+                  "path": ["videominer", "videos"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Get",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:8080/videominer/videos/:id",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "8080",
+                  "path": ["videominer", "videos", ":id"],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "xa63b78"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Put",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Título del vídeo\",\n  \"description\": \"Descripción\",\n  \"releaseTime\": \"2026-05-10\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:8080/videominer/videos/:id",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "8080",
+                  "path": ["videominer", "videos", ":id"],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "xa63b78"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Delete",
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:8080/videominer/videos/:id",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "8080",
+                  "path": ["videominer", "videos", ":id"],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "xa63b78"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "comment",
+          "item": [
+            {
+              "name": "GetAll",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:8080/videominer/comments",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "8080",
+                  "path": ["videominer", "comments"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Get",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:8080/videominer/comments/:id",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "8080",
+                  "path": ["videominer", "comments", ":id"],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "pegar-id-tras-getall"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Put",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"text\": \"Texto del comentario\",\n  \"createdOn\": \"2026-05-10T12:00:00Z\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:8080/videominer/comments/:id",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "8080",
+                  "path": ["videominer", "comments", ":id"],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "pegar-id-tras-getall"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Delete",
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:8080/videominer/comments/:id",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "8080",
+                  "path": ["videominer", "comments", ":id"],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "pegar-id-tras-getall"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "caption",
+          "item": [
+            {
+              "name": "GetAll",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:8080/videominer/captions",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "8080",
+                  "path": ["videominer", "captions"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Get",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:8080/videominer/captions/:id",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "8080",
+                  "path": ["videominer", "captions", ":id"],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "pegar-id-tras-getall"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Put",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"https://ejemplo.com/subtitulos.vtt\",\n  \"language\": \"es\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:8080/videominer/captions/:id",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "8080",
+                  "path": ["videominer", "captions", ":id"],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "pegar-id-tras-getall"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Delete",
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:8080/videominer/captions/:id",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "8080",
+                  "path": ["videominer", "captions", ":id"],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "pegar-id-tras-getall"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

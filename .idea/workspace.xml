@@ -6,8 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="f4798b2f-fc27-45dd-9b25-76aff33dd403" name="Changes" comment="junit tranformer test">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DailyMotionMiner/src/test/java/com/aiss/DailyMotionMiner/etl/DailyMotionTransformerTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/PeerTubeMiner/src/test/java/com/aiss/PeerTubeMiner/etl/Transformer2Test.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -163,7 +161,7 @@
       </map>
     </option>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Spring Boot.VideominerApplication">
     <configuration name="DailyMotionMinerApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="DailyMotionMiner" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.aiss.DailyMotionMiner.DailyMotionMinerApplication" />
